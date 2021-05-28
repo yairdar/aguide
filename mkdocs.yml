@@ -1,0 +1,4 @@
+site_name: Material for MkDocs
+dev_addr: 0.0.0.0:8000
+theme:
+  name: 'material'

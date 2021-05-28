@@ -6,11 +6,6 @@ vars:
   GREETING: Hello, World!
 
 tasks:
-  default:
-    cmds:
-      - echo "{{.GREETING}}"
-    silent: true
-
   spin:up:
     desc: _
     cmds:
