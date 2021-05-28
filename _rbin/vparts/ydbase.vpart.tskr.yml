@@ -27,7 +27,9 @@ tasks:
       - task: os:install:ohmyzsh
       - task: os:install:spaceship/ohmyzsh
 
-  config:ohmyzsh:plugins: 
+  config:ohmyzsh:plugins:
+    desc: _
+    cmds:
     - task: os:config:ohmyzsh:plugins:line
       vars:
-        _plugins: git docker dotenv
+        _plugins: git docker dotenv asdf

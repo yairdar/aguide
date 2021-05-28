@@ -30,6 +30,8 @@ tasks:
 
 
   install:spaceship/ohmyzsh:
+    vars:
+      .@@set=source_url: https://denysdovhan.com/spaceship-prompt/
     cmds:
       - |-
         zsh --login -c '
@@ -53,3 +55,27 @@ tasks:
     - task: config:ohmyzsh:plugins:line
       vars:
         _plugins: git docker dotenv
+
+  install:asdf.base:
+    vars:
+      .@@set=source_url: https://asdf-vm.com/#/core-manage-asdf
+      .@@set=os.deps: curl git
+      .@@set=zsh.plugin: asdf
+    cmds:
+      - |-
+        export marker=~/.asdf
+
+        test -d "$marker" && 
+          export _status=present  ||
+          export _status=missing
+    
+        if [[ "${_status}" == "missing" || "${ydv_force}" == "1" ]]
+        then
+
+          git clone https://github.com/asdf-vm/asdf.git "$marker"
+          cd ~/.asdf
+          git checkout "$(git describe --abbrev=0 --tags)"
+          export _status=updated
+    
+        fi
+        echo "status=${_status} name={{.TASK}}  path=$marker"
