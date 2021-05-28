@@ -1,0 +1,6 @@
+
+# https://taskfile.dev
+
+version: '3'
+tasks:
+  list-items: task -t _layout_/gitrepos.conf-v4.yaml

@@ -1,5 +1,7 @@
 # .@@=set block=yd.text.list
 __blobls__
+relrepos
+# .@@=over block=yd.text.list
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

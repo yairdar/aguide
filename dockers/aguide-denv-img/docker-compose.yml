@@ -1,0 +1,7 @@
+version: '3.2'
+services:
+aguide-denv:
+  image: aguide-denv-img
+  build:
+    context: ../..
+    dockerfile: dockers/aguide-denv-img/Dockerfile
