@@ -31,4 +31,6 @@ tasks:
   register:conda:
     desc: resister conda installations
     cmds:
-      - ls
+      - ~/miniconda3/condabin/conda init bash
+      - ~/miniconda3/condabin/conda init zsh
+

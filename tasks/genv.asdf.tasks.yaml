@@ -32,20 +32,18 @@ tasks:
         echo ".@@=dict: status=present tool={{._tool}} version=$({{._version_exp}})" >> /dev/stderr
 
   install:rclone:
-    vars:
-      _os_deps: curl git unzip
-      _tool: rclone
-      _version_exp: rclone version
-    cmds:
-      - sudo apt install -y {{._os_deps}}
-      - asdf plugin-add {{._tool}} || true
-      - asdf plugin-add {{._tool}} |& grep 'Plugin named {{._tool}} already added'
-      - asdf install {{._tool}} latest
-      - asdf global {{._tool}} $(asdf latest {{._tool}})
-      - echo $({{._version_exp}}) 
-    status:
-      - |-
-        {{._version_exp}}
-        echo ".@@=dict: status=present tool={{._tool}}" >> /dev/stderr
+    - task: install:asdf:tool
+      vars: 
+        _os_deps: curl git unzip
+        _tool: rclone
+        _version_exp: rclone version
+
+  install:rclone:
+    - task: install:asdf:tool
+      vars: 
+        _os_deps: curl git unzip
+        _tool: rclone
+        _version_exp: rclone version    
+
 
 #asdf plugin-add task https://github.com/particledecay/asdf-task.git
