@@ -4,7 +4,8 @@
 
 version: '3'
 includes:
-  os: ../_infra/ydman_lib/tasks/os.linux.tasks.yaml
+  os: ./os.linux.tasks.yaml
+  genv: ./genv.asdf.tasks.yaml
 
 vars:
   _name_: ydbase

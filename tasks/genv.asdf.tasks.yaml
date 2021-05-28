@@ -11,19 +11,23 @@ vars:
 tasks:
   install:asdf:tool:
     preconditions:
-      - sh: "[ ! -z  '{{._os_deps}}' ]"
-        msg: "expected args"
+      - sh: "[ ! -z  '{{._tool}}' ]"
+        msg: "expected args: _tool"
     vars:
       _args: |-
         _os_deps: curl git unzip
         _tool: rclone
         _version_exp: rclone version
-    
     cmds:
-      - sudo apt install -y {{._os_deps}}
-      - asdf plugin-add {{._tool}} || true
-      - asdf plugin-add {{._tool}} |& grep 'Plugin named {{._tool}} already added'
-      - asdf install {{._tool}} latest
+      - |-
+        if [[ "{{._os_deps}}" != "" ]]
+        then
+          sudo apt install -y {{._os_deps}}
+        fi
+
+      - asdf plugin-add {{._tool}} {{._plugin_url}} || true
+      - asdf plugin-add {{._tool}} {{._plugin_url}}  |& grep 'Plugin named {{._tool}} already added'
+      - asdf install {{._tool}} {{default "latest" ._version}} 
       - asdf global {{._tool}} $(asdf latest {{._tool}})
       - echo $({{._version_exp}}) 
     status:
@@ -31,19 +35,46 @@ tasks:
         {{._version_exp}}
         echo ".@@=dict: status=present tool={{._tool}} version=$({{._version_exp}})" >> /dev/stderr
 
-  install:rclone:
-    - task: install:asdf:tool
-      vars: 
-        _os_deps: curl git unzip
-        _tool: rclone
-        _version_exp: rclone version
+  _tmp_install_asdf_tool: &_tmp_install_asdf_tool
+    cmds:
+      - task: install:asdf:tool
+        vars: 
+          _os_deps: '{{._os_deps}}'
+          _tool: '{{._tool}}'
+          _version_exp: '{{._version_exp}}'
+    
+  _tmp_install_asdf_item: &with_asdf
+    vars:
+      _tool: '{{regexFind "install:.*" .TASK | trimPrefix "install:"}}'
+      _version_exp: '{{._tool}} version'      
+    cmds:
+      - echo {{._tool}}
+      - task: install:asdf:tool
+        vars: 
+          _os_deps: '{{._os_deps}}'
+          _tool: '{{._tool}}'
+          _version_exp: '{{._version_exp}}'
 
   install:rclone:
+    <<: *_tmp_install_asdf_tool
+    desc: "{{.TASK}}"
+    vars: 
+      _os_deps: curl git unzip
+      _tool: rclone
+      _version_exp: rclone version
+
+  install:docker-compose:
+    desc: "{{.TASK}}"
+    vars:
+      _tool: '{{regexFind "install:.*" .TASK | trimPrefix "install:"}}'
+    cmds:
     - task: install:asdf:tool
       vars: 
-        _os_deps: curl git unzip
-        _tool: rclone
-        _version_exp: rclone version    
+        _tool: '{{._tool}}'
+        _version_exp: '{{._tool}} version'
+        _plugin_url: https://github.com/virtualstaticvoid/asdf-docker-compose.git
+  
 
+  install:yq: *with_asdf
 
 #asdf plugin-add task https://github.com/particledecay/asdf-task.git
