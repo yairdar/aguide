@@ -14,5 +14,11 @@ tasks:
   spin:exec: 
     desc: _
     cmds:
-      - docker-compose exec aguide-denv {{.cmd}}
+      - docker-compose exec mkdocs-live {{.cmd}}
+  
+  rclone:
+    desc: +
+    cmds:
+      - |-
+        rclone --config {{.cmd}}
 
