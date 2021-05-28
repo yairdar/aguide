@@ -24,12 +24,10 @@ tasks:
   install:zsh.plugins:
     desc: _
     cmds:
-      - |
-        zsh --login -c '
-        source ~/.zshrc;
-        echo ${ZSH_CUSTOM};
-        '
       - task: os:install:ohmyzsh
       - task: os:install:spaceship/ohmyzsh
 
-
+  config:ohmyzsh:plugins: 
+    - task: os:config:ohmyzsh:plugins:line
+      vars:
+        _plugins: git docker dotenv
