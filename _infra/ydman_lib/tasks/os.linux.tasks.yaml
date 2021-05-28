@@ -1,0 +1,31 @@
+#!/usr/local/bin/task --taskfile
+
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  _name_: linux.tasks.yaml
+  _kind_: ydk:tskr.exe/tasker
+
+tasks:
+  install:zsh: 
+    cmds:
+      - sudo apt install zsh
+    status:
+      - which zsh
+
+  setshell:zsh:
+    cmds:
+      - cmd: |
+          _zsh_path=$(which zsh)
+          _zsh_user=${USER}
+          sudo chsh -s ${_zsh_path} ${_zsh_user}
+
+  install:ohmyzsh:
+    cmds:
+      - sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+
+
+

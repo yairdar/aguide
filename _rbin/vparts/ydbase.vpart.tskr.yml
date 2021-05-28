@@ -1,0 +1,25 @@
+#!/usr/local/bin/task --taskfile
+
+# https://taskfile.dev
+
+version: '3'
+includes:
+  os: ../_infra/ydman_lib/tasks/os.linux.tasks.yaml
+
+vars:
+  _name_: ydbase
+
+tasks:
+
+  install:zsh.base:
+    desc: install stuff using different handlers
+    vars:
+      _args_: |
+        shell: shell task
+    cmds:
+      - echo `pwd`
+      - task: os:install:zsh
+      - task: os:setshell:zsh
+      - task: os:install:ohmyzsh
+
+
