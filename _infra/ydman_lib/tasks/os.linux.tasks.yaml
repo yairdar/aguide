@@ -41,7 +41,7 @@ tasks:
         if [[ "${_status}" == "missing" || "${ydv_force}" == "1" ]]
         then 
           git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
-          ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+          echo ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
           export _status=updated;
         fi
         echo "status=${_status} name={{.TASK}}  path=$ZSH_CUSTOM/themes/spaceship-prompt"
