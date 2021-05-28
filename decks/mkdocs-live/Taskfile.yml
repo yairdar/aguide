@@ -11,10 +11,18 @@ tasks:
     cmds:
       - docker-compose up -d
       # - docker-compose up -d
+
   spin:exec: 
     desc: _
     cmds:
       - docker-compose exec mkdocs-live {{.cmd}}
+  
+  mkdocs:build:
+    desc: +
+    cmds:
+      - task: spin:exec
+        vars:
+          cmd: mkdocs build
   
   rclone:
     desc: +
