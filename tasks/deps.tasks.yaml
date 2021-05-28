@@ -1,0 +1,25 @@
+
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  # rclone lsd --http-url https://pub.rclone.org :http:
+  install:conda:
+    desc: _
+    vars:
+      _setup_name: ./Miniconda3-latest-Linux-x86_64.sh
+      _wdir: ./__blobls__/deps/setups/{{.TASK}}
+      # sha256sum: 09f53738b0cd3bb96f5b1bac488e5528df9906be2480fe61df40e0e0d19e3d48
+      md5sum: 81c773ff87af5cfac79ab862942ab6b3
+      source_rpath: 'https://repo.anaconda.com/miniconda/Miniconda3-4.7.12.1-Linux-x86_64.sh'
+    cmds:
+      - |-
+        rclone copyurl -P \
+        {{.source_rpath}} \
+        {{._wdir}}/{{._setup_name}}
+      - echo ".@@set=tag sha256sum='$(sha256sum {{._setup_name}})'"
+      - md5sum {{._setup_name}}
+      - sh {{._wdir}}/{{._setup_name}} -b -p /usr/local/miniconda3
+    status:
+      - md5sum {{._setup_name}} | grep {{.md5sum}}
