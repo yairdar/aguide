@@ -25,7 +25,34 @@ tasks:
   install:ohmyzsh:
     cmds:
       - sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    status:
+      - if [[ -d ~/.oh-my-zsh ]]; then true; else false; fi
 
 
-
-
+  install:spaceship/ohmyzsh:
+    cmds:
+      # - |
+      #   zsh --login -c '
+      #   source ~/.zshrc;
+      #   if [[ -d "$ZSH_CUSTOM/themes/spaceship-prompt"]]; then
+      #     echo name={{.TASK}} status=present >&2
+      #   else
+      #     git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
+      #   fi
+        # || git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
+      #   '
+      # >&2
+      - |-
+        zsh --login -c '
+        source ~/.zshrc
+        export marker="$ZSH_CUSTOM/themes/spaceship-prompt"
+        test -d "$marker" && 
+          export _status=present  ||
+          export _status=missing
+        if [[ "${_status}" == "missing" ]]
+        then 
+          git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1;
+          export _status=updated;
+        fi
+        echo "status=${_status} name={{.TASK}}  path=$ZSH_CUSTOM/themes/spaceship-prompt"
+        '

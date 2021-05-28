@@ -20,6 +20,16 @@ tasks:
       - echo `pwd`
       - task: os:install:zsh
       - task: os:setshell:zsh
+
+  install:zsh.plugins:
+    desc: _
+    cmds:
+      - |
+        zsh --login -c '
+        source ~/.zshrc;
+        echo ${ZSH_CUSTOM};
+        '
       - task: os:install:ohmyzsh
+      - task: os:install:spaceship/ohmyzsh
 
 
