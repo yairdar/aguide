@@ -1,0 +1,18 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  spin:up:
+    desc: _
+    cmds:
+      - docker-compose up -d
+      # - docker-compose up -d
+  spin:exec: 
+    desc: _
+    cmds:
+      - docker-compose exec aguide-denv {{.cmd}}
+
