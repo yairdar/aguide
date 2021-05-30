@@ -2,5 +2,10 @@
 
 Sometime we need guidence
 
-!!! note "mkdocs-guide"
-    
+!!! todo "mkdocs-guide"
+    content
+
+```mermaid
+graph LR
+    A --> B
+```
