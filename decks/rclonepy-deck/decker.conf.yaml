@@ -1,0 +1,11 @@
+#!/usr/local/bin/task --taskfile
+
+version: 3.0
+vars:
+  _tf_name_: decker.conf.yaml
+tasks:
+  list: yq e '.items[]'  {{._tf_name_}}
+items:
+  - from: ubuntu:20.04
+  # - run: curl https://rclone.org/install.sh | sudo bash
+  - run: curl https://rclone.org/install.sh | bash
