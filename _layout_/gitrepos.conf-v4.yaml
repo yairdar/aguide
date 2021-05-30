@@ -4,7 +4,8 @@ vars:
   _tpf_name_: gitrepos.conf-v4.yaml
 
 tasks:
-  list-items: yq4
+  list: yq e '.items[]' {{._tpf_name_}}'
+  resolve.one: git clone {{.gitrul}}
 
 items:
   
