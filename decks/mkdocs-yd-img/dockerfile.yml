@@ -1,0 +1,5 @@
+---
+- from: FROM ubuntu:18.04
+- run: RUN ls
+---
+

@@ -1,0 +1,21 @@
+
+version: '3'
+vars:
+  _tpf_name_: gitrepos.conf-v4.yaml
+
+tasks:
+  list: yq e '.items[]' {{._tpf_name_}}'
+  resolve.one: git clone {{.gitrul}}
+
+items:
+  
+  spur:
+    dirparent: relrepos
+    dirname: spur
+    giturl: git@github.com:yairdar/spur.py.git
+  
+  yairdar.github.io:
+    dirparent: sites
+    dirname: yairdar.github.io
+    giturl: git@github.com:yairdar/yairdar.github.io.git
+

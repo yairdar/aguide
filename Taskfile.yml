@@ -1,0 +1,31 @@
+# https://taskfile.dev
+
+version: '3'
+
+includes:
+  deps: ./tasks/deps.tasks.yaml
+
+vars:
+  _name_: aguide dir api
+
+tasks:
+  default:
+    cmds:
+      - echo "{{._name_}}"
+      - task -l
+    silent: true
+
+  spin:up:
+    desc: spinup deck
+    cmds:
+      - task {{.TASK}} -d {{.deck}}
+
+  spin:exec:
+    desc: spinup deck
+    cmds:
+      - task {{.TASK}} -d {{.deck}} cmd={{.cmd}}
+
+  mkdocs:build:
+    desc: _
+    cmds:
+      - task spin:exec deck=decks/mkdocs-live cmd='"mkdocs build"'

@@ -1,0 +1,36 @@
+#!/usr/local/bin/task --taskfile
+
+# https://taskfile.dev
+
+version: '3'
+includes:
+  os: ./os.linux.tasks.yaml
+  genv: ./genv.asdf.tasks.yaml
+
+vars:
+  _name_: ydbase
+
+tasks:
+
+  install:zsh.base:
+    desc: install stuff using different handlers
+    vars:
+      _args_: |
+        shell: shell task
+    cmds:
+      - echo `pwd`
+      - task: os:install:zsh
+      - task: os:setshell:zsh
+
+  install:zsh.plugins:
+    desc: _
+    cmds:
+      - task: os:install:ohmyzsh
+      - task: os:install:spaceship/ohmyzsh
+
+  config:ohmyzsh:plugins:
+    desc: _
+    cmds:
+    - task: os:config:ohmyzsh:plugins:line
+      vars:
+        _plugins: git docker dotenv asdf

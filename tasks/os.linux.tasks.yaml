@@ -1,0 +1,81 @@
+#!/usr/local/bin/task --taskfile
+
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  _name_: linux.tasks.yaml
+  _kind_: ydk:tskr.exe/tasker
+
+tasks:
+  install:zsh: 
+    cmds:
+      - sudo apt install zsh
+    status:
+      - which zsh
+
+  setshell:zsh:
+    cmds:
+      - cmd: |
+          _zsh_path=$(which zsh)
+          _zsh_user=${USER}
+          sudo chsh -s ${_zsh_path} ${_zsh_user}
+
+  install:ohmyzsh:
+    cmds:
+      - sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+    status:
+      - if [[ -d ~/.oh-my-zsh ]]; then true; else false; fi
+
+
+  install:spaceship/ohmyzsh:
+    vars:
+      .@@set=source_url: https://denysdovhan.com/spaceship-prompt/
+    cmds:
+      - |-
+        zsh --login -c '
+        source ~/.zshrc
+        export marker="$ZSH_CUSTOM/themes/spaceship-prompt"
+        test -d "$marker" && 
+          export _status=present  ||
+          export _status=missing
+        if [[ "${_status}" == "missing" || "${ydv_force}" == "1" ]]
+        then 
+          git clone https://github.com/denysdovhan/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
+          echo ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
+          export _status=updated;
+        fi
+        echo "status=${_status} name={{.TASK}}  path=$ZSH_CUSTOM/themes/spaceship-prompt"
+        '
+
+  config:spaceship/ohmyzsh: sed -i 's/^ZSH_THEME=".*"/ZSH_THEME="spaceship"/g' ~/.zshrc
+  config:ohmyzsh:plugins:line: sed -i 's/^plugins=\(.*\)/plugins=\({{._plugins}}\)/g' ~/.zshrc
+  config:ohmyzsh:plugins:base: 
+    - task: config:ohmyzsh:plugins:line
+      vars:
+        _plugins: git docker dotenv
+
+  install:asdf.base:
+    vars:
+      .@@set=source_url: https://asdf-vm.com/#/core-manage-asdf
+      .@@set=os.deps: curl git
+      .@@set=zsh.plugin: asdf
+    cmds:
+      - |-
+        export marker=~/.asdf
+
+        test -d "$marker" && 
+          export _status=present  ||
+          export _status=missing
+    
+        if [[ "${_status}" == "missing" || "${ydv_force}" == "1" ]]
+        then
+
+          git clone https://github.com/asdf-vm/asdf.git "$marker"
+          cd ~/.asdf
+          git checkout "$(git describe --abbrev=0 --tags)"
+          export _status=updated
+    
+        fi
+        echo "status=${_status} name={{.TASK}}  path=$marker"

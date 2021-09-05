@@ -1,0 +1,36 @@
+
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  # rclone lsd --http-url https://pub.rclone.org :http:
+  install:conda:
+    desc: _
+    vars:
+      _setup_name: ./Miniconda3-latest-Linux-x86_64.sh
+      _wdir: ./__blobls__/deps/setups/{{.TASK}}
+      __setup_path: "{{._wdir}}/{{._setup_name}}"
+      # sha256sum: 09f53738b0cd3bb96f5b1bac488e5528df9906be2480fe61df40e0e0d19e3d48
+      md5sum: 81c773ff87af5cfac79ab862942ab6b3
+      source_rpath: 'https://repo.anaconda.com/miniconda/Miniconda3-4.7.12.1-Linux-x86_64.sh'
+      dest_path: "{{.HOME}}/miniconda3"
+    cmds:
+      - |-
+        bash -c 'md5sum {{.__setup_path}} | grep {{.md5sum}}' || \
+        rclone copyurl -P \
+        {{.source_rpath}} \
+        {{.__setup_path}}
+      - |
+        echo ".@@set=tag sha256sum='$(sha256sum {{.__setup_path}})'"
+      - md5sum {{.__setup_path}} | grep {{.md5sum}}
+      - sh {{.__setup_path}} -b -p {{.dest_path}}
+    status:
+      - "[ -d {{.dest_path}} ] && rm -rf {{.__setup_path}} "
+  
+  register:conda:
+    desc: resister conda installations
+    cmds:
+      - ~/miniconda3/condabin/conda init bash
+      - ~/miniconda3/condabin/conda init zsh
+

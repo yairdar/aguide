@@ -1,0 +1,37 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+  
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+    silent: true
+
+  tcmd:
+    desc: task generalized command
+    vars:
+      _args_sample: |
+        dest_name: "{{.TASK}}"
+        source_path: ../_infra/ydman_lib
+        cmd: ln -s {{.source_path}} {{.dest_name}}
+      _args_: |
+        dest_name: dest thing
+        source_path: source_thing
+        cmd: the command
+    env:
+      _yd_p_udest:
+      _yd_p_usource:
+      _yd_c_ucmd:
+    cmds:
+      - cmd: |
+          {{.cmd}}
+
+
+          
+
+      

@@ -1,0 +1,9 @@
+items:
+  - name: taker.shebang.line
+    content: '^#!/usr/local/bin/task --taskfile'
+    fileext: '*.yaml;*.yaml'
+    desc: current shebang line for tasker
+    issues:
+      items:
+        - name: change.to.env.shebang
+
