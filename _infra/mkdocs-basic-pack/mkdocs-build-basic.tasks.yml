@@ -49,6 +49,7 @@ vars:
 # ## API Settings
 #
 # ```yaml
+  source_root: "$(realpath . 2>/dev/null || echo .)"
   _title_: pip update tasks for conda env
   _taskfile_name_: mkdocs-build-basic.tasks.yml
   # ### override those settings when used as included-tasker
@@ -116,7 +117,7 @@ tasks:
 #
 # ```yaml
     desc: serve docs from markdown sources
-    dir: '{{ default .source_root .dir }}'
+    dir: '{{ default "." .source_root }}'
     vars:
       site_port: '{{ default "38000" .site_port }}'
     cmds:
