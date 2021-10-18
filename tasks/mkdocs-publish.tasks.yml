@@ -4,9 +4,14 @@ tasks:
     desc: copy from __localbuild__/docs/site to relrepos/yairdar.github.io/aguide/latest
     vars:       
       site_dir: '$(yq read ./mkdocs.yml site_dir)'
-      pub_dir: relrepos/yairdar.github.io/aguide/latest
+      pub_dir: relrepos/yairdar.github.io/aguide
     cmds:
-      - task reposet:resolve
-      - rm -rf relrepos/yairdar.github.io/aguide
-      - rclone {{.site_dir}} {{.pub_dir}}
+      # - task repo='"yairdar.github.io"' reposet:resolve:one reposet:pull:one 
+      # - rm -rf relrepos/yairdar.github.io/aguide
+      - rclone copy {{.site_dir}} {{.pub_dir}}
+
+  publish-from-local-to-remote:
+    desc: publish (git push) from local repo to remote
+    cmds:
+      - task -d relrepos/yairdar.github.io git:publish-changes
        

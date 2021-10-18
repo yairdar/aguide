@@ -6,6 +6,7 @@ includes:
   deps: ./tasks/deps.tasks.yaml
   docs-builder: _infra/mkdocs-basic-pack/mkdocs-build-basic.tasks.yml
   reposet: _infra/reposet_pack/reposet.tasks.yml
+  docs-publisher: tasks/mkdocs-publish.tasks.yml
 
 vars:
   _name_: aguide dir api

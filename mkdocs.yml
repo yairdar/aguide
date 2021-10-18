@@ -7,7 +7,23 @@ edit_uri: "-/edit/master/docs/"
 site_dir: __localbuild__/docs/site
 # site_dir: relrepos/yairdar.github.io
 plugins:
-  - simple:
+  - simple: # https://athackst.github.io/mkdocs-simple-plugin
+      ignore_folders:
+        - "__localbuild__"
+        - "__blobs__"
+        - "__blob__"
+        - "data4tests"
+        - "tests"
+        - "src"
+        - "docs/course"
+        - "decks"
+        - "dockers"
+        - "projects"
+        - "jenpy"
+        - "__tmp__"
+        - "_infra"
+        - "_layout_"
+        - "tasks"
       # merge_docs_dir: false
       include_extensions:
         - ".txt"
