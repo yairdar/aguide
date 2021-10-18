@@ -1,0 +1,149 @@
+#!/usr/local/bin/task --taskfile
+version: "3"
+
+# md
+# # Mkdocs Essentials Tasker
+#
+# This is self contained, self descriptive all-in-one **drop-in tasker**.
+# It can be executed directly `./mxp-mkdocs-builder.yml`
+# Or using task tool `task -t mxp-mkdocs-builder.yml`
+#
+# This tasker contains pip dependencies list at `vars.deps_pip_mkdocs`
+# It also includes documentation in format of mkdocs-simple-plugin for mkdocs tool.
+#
+# > **Can be injected to any conda/pip environment**
+#
+# ## Get the tasker
+#
+# Download latest version of [mxp-mkdocs-builder.yml](./mxp-mkdocs-builder.yml).
+#
+# ## Usage
+#
+# This tasker support standalone-cli and included-tasker modes.
+#
+# - for standalone-cli execution command starts with `./mxp-mkdocs-builder.yml`
+# - for included-tasker execution command starts with `task mkdocs-builder:`
+#   when `mkdocs-builder` is name given to mxp-mkdocs-builder.yml in include statement
+#
+# We will refer here to standalone-cli usage,
+# because included-tasker usage is mostly
+# change execution command prefix accordingly to include statement.
+#
+#
+# ???+ info "List Available Tasks"
+#      ```bash
+#      # ### run command: ./mxp-mkdocs-builder.yml -l                                                                                                                                                [±OBJX-17.docs.in.test.and.publish ●●]
+#      task: Available tasks for this project:
+#      * build-site:   build markdown sources to html static web site
+#      * install-here: Install Mk docs essential deps in current env
+#      * serve-site:   serve static site with python server
+#      * serve-source: serve docs from markdown sources
+#      ```
+#      You should run those commands within venv you installed mkdocs-essence
+#      using `./mxp-mkdocs-builder.yml install-here` command.
+#
+# /md
+
+#
+# /md
+
+vars:
+# md
+# ## API Settings
+#
+# ```yaml
+  _title_: pip update tasks for conda env
+  _taskfile_name_: mxp-mkdocs-builder.yml
+  # ### override those settings when used as included-tasker
+  mkd_es__pip_env_conf_file: mxp-mkdocs-builder.yml # path to file with deps list
+  mkd_es__pip_env_conf_loc: vars.deps_pip_mkdocs # path to deps list inside the file
+  mkd_es__pip_items_exp: yq r {{.mkd_es__pip_env_conf_file}} '{{.mkd_es__pip_env_conf_loc}}'  # get-value expression
+# ```
+#
+# ## Config Entries
+#
+# ```yaml
+  deps_pip_mkdocs: >-
+    "mkdocs==1.2.1"
+    "Markdown>=2.6"
+    "mkdocs-material"
+    "mkdocs-simple-plugin"
+    "mkdocs-awesome-pages-plugin"
+    "pymdown-extensions"
+    "mkdocstrings"
+    "mkdocs-jupyter"
+    "python-markdown-math"
+    "mkdocs-material-extensions"
+    "mkdocs-mermaid2-plugin"
+    "mdx_truly_sane_lists"
+    "mkdocs-macros-plugin"
+    "mkdocs-versioning"
+# ```
+#
+# /md
+
+tasks:
+  default:
+    silent: true
+    cmds:
+    - echo "   === API for {{._taskfile_name_}} ===    "
+    - task -t {{._taskfile_name_}} -l
+# md
+# ## API Tasks
+#
+# >
+  install-here:
+#
+# ```yaml
+    desc: Install Mk docs essential deps in current env
+    vars:
+      pip_items_val: "$({{.mkd_es__pip_items_exp}})"
+    cmds:
+    - pip install {{.pip_items_val}}
+# ```
+#
+# >
+#
+  build-site:
+#
+# ```yaml
+    desc: build markdown sources to html static web site
+    dir: '{{ default .source_root .dir }}'
+    cmds:
+    - cmd: mkdocs build
+# ```
+#
+# >
+  serve-source:
+#
+# ```yaml
+    desc: serve docs from markdown sources
+    dir: '{{ default .source_root .dir }}'
+    vars:
+      site_port: '{{ default "38000" .site_port }}'
+    cmds:
+    - echo "Exposing at $(pwd)"
+    - echo "See live  site at http://localhost:{{.site_port}}"
+    - cmd: mkdocs serve -a 0.0.0.0:{{.site_port}}
+# ```
+#
+# >
+  serve-site:
+#
+# ```yaml
+    desc: serve static site with python server
+    silent: yes
+    args:
+      site_dir: fs path to root of site
+      site_port: serving port
+    vars:
+      site_port: '{{ default "15558" .site_port }}'
+      source_root: '{{ default .source_root .dir }}'
+      site_dir: '$(yq read {{.source_root}}/mkdocs.yml site_dir)'
+    dir: '{{.source_root}}/{{.site_dir}}'
+    cmds:
+      - echo "Exposing at $(pwd)"
+      - echo "See comipled site at http://localhost:{{.site_port}}"
+      - python -m http.server  {{.site_port}}
+# ```
+# /md
