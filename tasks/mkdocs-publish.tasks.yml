@@ -1,0 +1,12 @@
+version: "3"
+tasks:
+  prepublish-to-local-mirror:
+    desc: copy from __localbuild__/docs/site to relrepos/yairdar.github.io/aguide/latest
+    vars:       
+      site_dir: '$(yq read ./mkdocs.yml site_dir)'
+      pub_dir: relrepos/yairdar.github.io/aguide/latest
+    cmds:
+      - task reposet:resolve
+      - rm -rf relrepos/yairdar.github.io/aguide
+      - rclone {{.site_dir}} {{.pub_dir}}
+       
