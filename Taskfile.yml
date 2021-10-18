@@ -4,9 +4,11 @@ version: '3'
 
 includes:
   deps: ./tasks/deps.tasks.yaml
+  docs-builder: _infra/mkdocs-basic-pack/mkdocs-build-basic.tasks.yml
 
 vars:
   _name_: aguide dir api
+  source_root: "$(realpath .)"
 
 tasks:
   default:
@@ -29,10 +31,3 @@ tasks:
     desc: _
     cmds:
       - task spin:exec deck=decks/mkdocs-live cmd='"mkdocs build"'
-
-  docs-serve-from-source:
-    desc: _
-    cmds:
-      - |- 
-        _infra/mkdocs-basic-pack/mkdocs-build-basic.tasks.yml \
-        serve-source source_root=$(realpath .)
