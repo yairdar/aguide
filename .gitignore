@@ -1,6 +1,7 @@
 
 __blobs__
-__tmp___
+__tmp__
+
 .task
 .idea
 .vscode
