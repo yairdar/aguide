@@ -9,7 +9,8 @@ includes:
 vars:
   _name_: aguide dir api
   source_root: "$(realpath .)"
-
+  reposet__conf_map: relrepos:_layout_/reposet.conf-v4.yaml@vars.reposet_items_yaml
+  
 tasks:
   default:
     cmds:

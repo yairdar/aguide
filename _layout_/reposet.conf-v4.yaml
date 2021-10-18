@@ -1,0 +1,16 @@
+#!/usr/local/bin/task --taskfile
+
+apiVersion: projects/v1
+kind: mxk:ydt.reposet.items
+
+metadata:
+  name: reposet
+
+vars:
+  reposet_items_yaml: |-
+    ci-config-jenlib:
+      name: ci-config-jenlib
+      subdir: .
+      dirname: ./ci-config-jenlib
+      branch: main
+      remote_origin_url: git@github.com:ydzvulon/ci-config-jenlib.git

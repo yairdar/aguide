@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-
-# Show env vars
-grep -v '^#' .env
-
-# dry run
-grep -v '^#' .env | xargs echo 
-# Export env vars
-export $(grep -v '^#' .env | xargs)

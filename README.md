@@ -36,5 +36,5 @@ Now we can see documentation using
 
 ## Documentation Examples
 
-- [Take a look on documentation trics](./docs/guides/mkdocs-guide.md)
-
+- [Take a look on documentation trics](./guides/mkdocs-guide.md)
+- or here [Take a look on documentation trics](./docs/guides/mkdocs-guide.md)
