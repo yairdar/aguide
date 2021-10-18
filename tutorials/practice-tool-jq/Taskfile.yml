@@ -1,0 +1,13 @@
+# https://taskfile.dev
+
+version: '3'
+includes:
+  jq-tutorial: jq-tutorial-repr.tasks.yml
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  default:
+    cmds:
+      - task -l
+    silent: true
