@@ -5,7 +5,7 @@ includes:
   ssh_creds: tpack.credentials.sync.tasks.yml
 vars:
   GREETING: Hello, World!
-  target_dcon_id_exp: docker ps | grep vsc-vscode | tail -n 1| cut -d' '  -f1
+  target_dcon_id_exp: docker ps | grep vsc-yd-int-cli- | tail -n 1| cut -d' '  -f1
 
 tasks:
   default:
