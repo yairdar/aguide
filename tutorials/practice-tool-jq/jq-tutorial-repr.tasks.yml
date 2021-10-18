@@ -6,7 +6,6 @@ vars:
   _me__dir_name: jq-tutorial
   _me__dimg_lastname: jq-tutorial-dimg
 tasks:
-  
   resolve-source:
     desc: resolve (fetch) sources from git store
     cmds:
@@ -19,6 +18,7 @@ tasks:
   
   build-dimg:
     desc: resolve (fetch) sources from git store
+    dir: '{{._me__dir_name}}'
     sources:
     - '{{._me__dir_name}}/**/*'
     cmds:
@@ -31,9 +31,30 @@ tasks:
     - task: build-dimg
 
   start-tutorial:
-    desc: Run Tutorial Series for jq tool. 
+    desc: Run Tutorial Series for jq tool.  arg=...custom arg...
+    dir: '{{._me__dir_name}}'
     preconditions:
     - sh: "docker image inspect {{._me__dimg_lastname}}"
       msg: "please resolve {{._me__dimg_lastname}} dimg"
+    vars:
+      _arg_opt_: '{{ default "" .arg}}'
     cmds:
-    - docker run -ti {{._me__dimg_lastname}}
+    - docker run -ti {{._me__dimg_lastname}} {{._arg_opt_}}
+
+  # ===  init _as_tutorial_stage  block ===
+  # --- Proto Task  _as_tutorial_stage ---
+  _as_tutorial_stage: &_as_tutorial_stage
+    desc: '{{.TASK}}'
+    vars: {dcmd: '{{splitList "--" .TASK | last}}'}
+    cmds:
+    - task: start-tutorial
+      vars: {arg: '{{.dcmd}}'}
+        
+  # --- Derived from  _as_tutorial_stage  tasks ---
+  tutorial--pick: *_as_tutorial_stage
+  tutorial--objects: *_as_tutorial_stage
+  tutorial--mapping: *_as_tutorial_stage
+  tutorial--filtering: *_as_tutorial_stage
+  tutorial--output: *_as_tutorial_stage
+  tutorial--reduce: *_as_tutorial_stage
+  # ===  over _as_tutorial_stage  block ===
