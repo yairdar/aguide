@@ -1,0 +1,36 @@
+# https://taskfile.dev
+
+version: '3'
+includes:
+  ssh_creds: tpack.credentials.sync.tasks.yml
+vars:
+  GREETING: Hello, World!
+  target_dcon_id_exp: docker ps | grep vsc-vscode | tail -n 1| cut -d' '  -f1
+
+tasks:
+  default:
+    cmds:
+      - task: info
+    silent: true
+
+  info:
+    desc: shows information about this pack lib
+    cmds:
+      - |-
+        echo '
+        * info                        *info
+        * set-dev-vscode-python        * setup with git creds
+        '
+
+  set-dev-vscode-python:
+    desc: setup with git creds
+    deps:
+      - task: ssh_creds:copy-main-ssh-to-dcon
+        vars:
+          tdocker_id: "$({{.target_dcon_id_exp}})"
+      - task: ssh_creds:ensure-tasker
+        vars:
+          tdocker_id: "$({{.target_dcon_id_exp}})"
+      - task: ssh_creds:copy-linode-creds-to-dcon
+        vars:
+          tdocker_id: "$({{.target_dcon_id_exp}})"
