@@ -1,11 +1,9 @@
-#===========
 site_name:  Servises Docs
 # @info.todo: fill your gitlab repo URL + Name
 # https://chrieke.medium.com/the-best-mkdocs-plugins-and-customizations-fc820eb19759
 repo_name: reporepo
 edit_uri: "-/edit/master/docs/"
 site_dir: __localbuild__/docs/site
-# site_dir: relrepos/yairdar.github.io
 plugins:
   - simple:
       # merge_docs_dir: false
@@ -94,13 +92,15 @@ extra_css:
 
 extra_javascript:
   - "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" # for math
-  -  https://unpkg.com/mermaid@8.9.0/dist/mermaid.min.js # for mermaid graphs
 
+# nav:
+#   - Home:
+#      - ... | README.md
+#   - ...
+# nav:
 
-nav:
-
-  - Home:
-    - ... | index.md
+#   - Home:
+#     - ... | *.md
 
 #   - Infra:
 #     - ... | _infra/**/*
@@ -108,5 +108,5 @@ nav:
 #     - ... | _tasks/**/*
 #     - ... | decks/**/*
 
-  - ...
+#   - ...
 
