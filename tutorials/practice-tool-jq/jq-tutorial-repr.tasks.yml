@@ -1,0 +1,35 @@
+# https://taskfile.dev
+
+version: '3'
+tasks:
+  
+  resolve-source:
+    desc: resolve (fetch) sources from git store
+    cmds:
+    - git clone https://github.com/rjz/jq-tutorial.git
+    generates:
+    - jq-tutorial/**/*
+    status:
+    - test -e jq-tutorial/.git
+  
+  build-dimg:
+    desc: resolve (fetch) sources from git store
+    sources:
+    - jq-tutorial/**/*
+    cmds:
+    - git clone https://github.com/rjz/jq-tutorial.git
+    - docker build -t jq-tutorial .
+
+  resolve-dimg:
+    desc: resolve dimg for tutorial
+    cmds:
+    - task: resolve-source
+    - task: build-dimg
+
+  start-tutorial:
+    desc: Run Tutorial Series for jq tool. 
+    preconditions:
+      - sh: "docker image inspect jq-tutorial"
+        msg: "please resolve jq-tutorial dimg"
+    cmds:
+      - docker run -ti jq-tutorial

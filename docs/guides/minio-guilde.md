@@ -1,6 +1,16 @@
 # Minio Guide
 
 
+## Rclone vs Minio
+
+- https://www.libhunt.com/compare-minio-vs-rclone?ref=compare
+- https://forum.rclone.org/t/recommendations-for-using-rclone-with-a-minio-10m-files/14472
+- https://golangrepo.com/tag/terraform-provider-minio_star_1
+- https://www.huuphan.com/2021/08/rclone-backup-all-vps-to-microsoft.html
+- https://awstools.dev/
+- https://opensourcelibs.com/libs/s3
+- https://strobelstefan.org/2021/03/02/rclone-dateien-von-git-repository-automatisch-zu-nexcloud-uebertragen/
+
 
 ## Awesome Minio [![Build Status](https://api.travis-ci.org/minio/awesome-minio.svg?branch=master)](https://travis-ci.org/minio/awesome-minio) [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome) [![Slack](https://slack.minio.io/slack?type=svg)](https://slack.minio.io)
 
