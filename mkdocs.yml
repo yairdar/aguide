@@ -96,14 +96,11 @@ extra_javascript:
   - "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" # for math
   -  https://unpkg.com/mermaid@8.9.0/dist/mermaid.min.js # for mermaid graphs
 
-# nav:
-#   - Home:
-#      - ... | README.md
-#   - ...
-# nav:
 
-#   - Home:
-#     - ... | *.md
+nav:
+
+  - Home:
+    - ... | index.md
 
 #   - Infra:
 #     - ... | _infra/**/*
@@ -111,5 +108,5 @@ extra_javascript:
 #     - ... | _tasks/**/*
 #     - ... | decks/**/*
 
-#   - ...
+  - ...
 
