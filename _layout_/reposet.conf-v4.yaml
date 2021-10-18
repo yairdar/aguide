@@ -1,5 +1,3 @@
-#!/usr/local/bin/task --taskfile
-
 apiVersion: projects/v1
 kind: mxk:ydt.reposet.items
 
@@ -8,9 +6,9 @@ metadata:
 
 vars:
   reposet_items_yaml: |-
-    ci-config-jenlib:
-      name: ci-config-jenlib
+    yairdar.github.io:
+      name: yairdar.github.io
       subdir: .
-      dirname: ./ci-config-jenlib
+      dirname: ./yairdar.github.io
       branch: main
-      remote_origin_url: git@github.com:ydzvulon/ci-config-jenlib.git
+      remote_origin_url: git@github.com:yairdar/yairdar.github.io.git
