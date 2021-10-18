@@ -1,24 +1,28 @@
 # https://taskfile.dev
 
 version: '3'
+vars:
+  _me__git_repo_http_url: https://github.com/rjz/jq-tutorial.git
+  _me__dir_name: jq-tutorial
+  _me__dimg_lastname: jq-tutorial-dimg
 tasks:
   
   resolve-source:
     desc: resolve (fetch) sources from git store
     cmds:
-    - git clone https://github.com/rjz/jq-tutorial.git
+    - rm -rf '{{._me__dir_name}}'
+    - git clone {{._me__git_repo_http_url}}
     generates:
-    - jq-tutorial/**/*
+    - '{{._me__dir_name}}/**/*'
     status:
-    - test -e jq-tutorial/.git
+    - '[ -e {{._me__dir_name}}/.git ]'
   
   build-dimg:
     desc: resolve (fetch) sources from git store
     sources:
-    - jq-tutorial/**/*
+    - '{{._me__dir_name}}/**/*'
     cmds:
-    - git clone https://github.com/rjz/jq-tutorial.git
-    - docker build -t jq-tutorial .
+    - docker build -t {{._me__dimg_lastname}} .
 
   resolve-dimg:
     desc: resolve dimg for tutorial
@@ -29,7 +33,7 @@ tasks:
   start-tutorial:
     desc: Run Tutorial Series for jq tool. 
     preconditions:
-      - sh: "docker image inspect jq-tutorial"
-        msg: "please resolve jq-tutorial dimg"
+    - sh: "docker image inspect {{._me__dimg_lastname}}"
+      msg: "please resolve {{._me__dimg_lastname}} dimg"
     cmds:
-      - docker run -ti jq-tutorial
+    - docker run -ti {{._me__dimg_lastname}}
