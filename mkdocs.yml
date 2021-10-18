@@ -24,6 +24,7 @@ plugins:
         - "_infra"
         - "_layout_"
         - "tasks"
+        - "relrepos"
       # merge_docs_dir: false
       include_extensions:
         - ".txt"
