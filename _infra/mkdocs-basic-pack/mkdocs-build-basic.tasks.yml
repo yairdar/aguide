@@ -5,8 +5,8 @@ version: "3"
 # # Mkdocs Essentials Tasker
 #
 # This is self contained, self descriptive all-in-one **drop-in tasker**.
-# It can be executed directly `./mxp-mkdocs-builder.yml`
-# Or using task tool `task -t mxp-mkdocs-builder.yml`
+# It can be executed directly `./mkdocs-build-basic.tasks.yml`
+# Or using task tool `task -t mkdocs-build-basic.tasks.yml`
 #
 # This tasker contains pip dependencies list at `vars.deps_pip_mkdocs`
 # It also includes documentation in format of mkdocs-simple-plugin for mkdocs tool.
@@ -15,15 +15,15 @@ version: "3"
 #
 # ## Get the tasker
 #
-# Download latest version of [mxp-mkdocs-builder.yml](./mxp-mkdocs-builder.yml).
+# Download latest version of [mkdocs-build-basic.tasks.yml](./mkdocs-build-basic.tasks.yml).
 #
 # ## Usage
 #
 # This tasker support standalone-cli and included-tasker modes.
 #
-# - for standalone-cli execution command starts with `./mxp-mkdocs-builder.yml`
+# - for standalone-cli execution command starts with `./mkdocs-build-basic.tasks.yml`
 # - for included-tasker execution command starts with `task mkdocs-builder:`
-#   when `mkdocs-builder` is name given to mxp-mkdocs-builder.yml in include statement
+#   when `mkdocs-builder` is name given to mkdocs-build-basic.tasks.yml in include statement
 #
 # We will refer here to standalone-cli usage,
 # because included-tasker usage is mostly
@@ -32,7 +32,7 @@ version: "3"
 #
 # ???+ info "List Available Tasks"
 #      ```bash
-#      # ### run command: ./mxp-mkdocs-builder.yml -l                                                                                                                                                [±OBJX-17.docs.in.test.and.publish ●●]
+#      # ### run command: ./mkdocs-build-basic.tasks.yml -l
 #      task: Available tasks for this project:
 #      * build-site:   build markdown sources to html static web site
 #      * install-here: Install Mk docs essential deps in current env
@@ -40,10 +40,7 @@ version: "3"
 #      * serve-source: serve docs from markdown sources
 #      ```
 #      You should run those commands within venv you installed mkdocs-essence
-#      using `./mxp-mkdocs-builder.yml install-here` command.
-#
-# /md
-
+#      using `./mkdocs-build-basic.tasks.yml install-here` command.
 #
 # /md
 
@@ -53,11 +50,11 @@ vars:
 #
 # ```yaml
   _title_: pip update tasks for conda env
-  _taskfile_name_: mxp-mkdocs-builder.yml
+  _taskfile_name_: mkdocs-build-basic.tasks.yml
   # ### override those settings when used as included-tasker
-  mkd_es__pip_env_conf_file: mxp-mkdocs-builder.yml # path to file with deps list
+  # mkd_es__pip_env_conf_file: mkdocs-build-basic.tasks.yml # path to file with deps list
   mkd_es__pip_env_conf_loc: vars.deps_pip_mkdocs # path to deps list inside the file
-  mkd_es__pip_items_exp: yq r {{.mkd_es__pip_env_conf_file}} '{{.mkd_es__pip_env_conf_loc}}'  # get-value expression
+  # mkd_es__pip_items_exp: yq r {{.mkd_es__pip_env_conf_file}} '{{.mkd_es__pip_env_conf_loc}}'  # get-value expression
 # ```
 #
 # ## Config Entries
@@ -91,15 +88,16 @@ tasks:
 # md
 # ## API Tasks
 #
-# >
-  install-here:
-#
 # ```yaml
+  install-pip-deps:
     desc: Install Mk docs essential deps in current env
     vars:
-      pip_items_val: "$({{.mkd_es__pip_items_exp}})"
+      pip_items_val: '{{.deps_pip_mkdocs}}'
     cmds:
     - pip install {{.pip_items_val}}
+
+  install-deps: {desc: install-pip-deps, cmds: [{task: install-pip-deps}]}
+
 # ```
 #
 # >

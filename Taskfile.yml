@@ -29,3 +29,10 @@ tasks:
     desc: _
     cmds:
       - task spin:exec deck=decks/mkdocs-live cmd='"mkdocs build"'
+
+  docs-serve-from-source:
+    desc: _
+    cmds:
+      - |- 
+        _infra/mkdocs-basic-pack/mkdocs-build-basic.tasks.yml \
+        serve-source source_root=$(realpath .)
