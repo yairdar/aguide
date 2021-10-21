@@ -1,0 +1,4 @@
+
+vars:
+  recent_yaml_updates: |-
+    https://github.com/yaml/yaml/issues/48

@@ -1,0 +1,28 @@
+version: '3'
+
+tasks:
+
+  hidden:
+    cmds:
+      - cmd: &use_me |-
+          echo use use
+      - &use_str |-
+        echo no use
+  reuse:
+    desc: _
+    cmds:
+      - *use_me
+      - *use_str
+
+  the-label:
+    - task: print
+      vars:
+        MESSAGE: hello
+    - task: print
+      vars:
+        MESSAGE: world
+
+  print:
+    label: 'print msg={{.MESSAGE}}'
+    prefix: 'print msg={{.MESSAGE}}'
+    cmds: ['echo "{{.MESSAGE}}"']

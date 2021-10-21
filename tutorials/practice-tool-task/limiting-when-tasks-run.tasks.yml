@@ -1,0 +1,76 @@
+version: '3'
+
+vars:
+  _title_: limiting-when-tasks-run
+  _source_url_: |-
+    https://taskfile.dev/#/usage?id=limiting-when-tasks-run
+
+tasks:
+  default:
+    - task: main
+
+  main:
+    desc: _
+    cmds:
+    - task: generate-file
+      vars: { CONTENT: '1' }
+    - task: generate-file
+      vars: { CONTENT: '2' }
+    - task: generate-file
+      vars: { CONTENT: '2' }
+
+  generate-file:
+    desc: _
+    run: when_changed
+    deps:
+    - install-deps
+    cmds:
+    - echo "[register_call={{.TASK}} .CONTENT={{.CONTENT}}]"
+
+  install-deps:
+    desc: _
+    run: once
+    cmds:
+    - |-
+      echo "[register_call={{.TASK}}]"
+      # long operation like installing packages
+      # pwd
+      # which bash
+      sleep 3
+      #for it in 1..5; do echo $it && sleep 1; done;
+
+  test:
+    desc: _
+    vars:
+      run_log: __results__/{{._title_}}.run.log
+    cmds:
+      - |-
+        mkdir __results__ || echo ok
+        rm -rf {{.run_log}}
+        bash -c 'task limiting-when-tasks-run:main | tee {{.run_log}}'
+        
+        
+        cat '{{.run_log}}' \
+        | grep 'register_call=limiting-when-tasks-run:install-deps' \
+        | wc -l 
+
+
+# misc:
+#   foo: &foo
+#     a: foo_a
+#     thing: foo_thing
+#     c: foo_c
+#   bar: &bar
+#     b: bar_b
+#     thing: bar_thing
+#     c: bar_c
+#   foobarList:
+#     b: foobarList_b
+#     !!merge <<:
+#       - *foo
+#       - *bar
+#     c: foobarList_c
+#   foobar:
+#     c: foobar_c
+#     !!merge <<: *foo
+#     thing: foobar_thing

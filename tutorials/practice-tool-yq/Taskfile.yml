@@ -86,7 +86,8 @@ tasks:
           {{.exp}}
 
   operator_with__basic_sample2:
-    desc: _
+    desc: "with operator
+           short access to block"
     vars:
       content: |-
         b: 
