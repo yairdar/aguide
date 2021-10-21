@@ -1,0 +1,101 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+env:
+  NO_COLOR: "1"
+
+tasks:
+  default:
+    cmds:
+      - task -l
+    silent: true
+
+  resolve-yq4:
+    desc: _
+    dir: data_samples
+    vars:
+      src: https://github.com/mikefarah/yq/releases/download/v4.13.4/yq_windows_amd64.exe
+    cmds:
+      - mkdir __bin__ || echo "ok"
+      - curl -L {{.src}} --output __bin__/yq4new.exe
+
+  run-yq-eval-sample:
+    desc: run 'yq eval' toolcmd 
+    preconditions:
+    - sh: '[[ "{{.exp}}" != "" ]]'
+      msg: "required parameter exp _not_ provided"
+    cmds:
+    # ./__bin__/yq4 eval {{.exp}} {{.src}}
+    - cat {{.src}} | ./__bin__/yq4 eval {{.exp}} - ./__bin__/yq4 eval {{.exp}} -
+
+  _bind_single__run_yq_eval_sample_: &_bind_single__run_yq_eval_sample_
+    cmds:
+    - task: run-yq-eval-sample
+      vars: 
+        exp: '{{ default .TASK .exp}}'
+        src: '{{.src}}'
+
+  run-yq-eval-sample2:
+    desc: run 'yq eval' toolcmd 
+    silent: true
+    preconditions:
+    - sh: '[[ "{{.exp}}" != "" ]]'
+      msg: "required parameter exp _not_ provided"
+    - sh: '[[ "{{.task}}" != "" ]]'
+      msg: "required parameter task _not_ provided"
+    vars:
+      src: 'Taskfile.yml'
+      epath: |-
+        '.tasks.{{.task}}.vars.content'
+    cmds:
+    
+    - |-
+      echo "---
+      # --- input ---"
+
+      cat {{.src}} | ./__bin__/yq4 eval {{.epath}} -
+    
+    - |-
+      echo "---
+      # --- output ---"
+      cat {{.src}} \
+      | ./__bin__/yq4 eval {{.epath}} - \
+      | ./__bin__/yq4 eval {{.exp}} -
+
+
+  operator_with__basic_sample:
+    desc: _
+    vars:
+      content: |-
+        b: 
+          - some
+          - strage: list
+        c: [3,4]
+        a:  
+          deeply:
+            nested: 5
+      exp: |-
+        'with(.a.deeply.nested ; . = "888")'
+      src: 'data_samples/{{.TASK}}.yml'
+    <<: *_bind_single__run_yq_eval_sample_
+
+  operator_with__basic_sample2:
+    desc: _
+    vars:
+      content: |-
+        b: 
+          - some
+          - strage: list
+        c: [3,4]
+        a:  
+          deeply:
+            nested: 5
+    cmds:
+    - task: run-yq-eval-sample2
+      vars: 
+        exp: |-
+          'with(.a.deeply.nested ; . = "888")'
+        task: '{{.TASK}}'          
