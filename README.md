@@ -38,3 +38,19 @@ Now we can see documentation using
 
 - [Take a look on documentation trics](./guides/mkdocs-guide.md)
 - or here [Take a look on documentation trics](./docs/guides/mkdocs-guide.md)
+
+
+## Nature of Software Architecture
+Guide To Comfortable Software Development Process
+
+###  Areas
+
+- Execution, Compute
+- Query
+- Store Storage/Memory
+- Transfer Network
+
+### Operators
+
+### Elements
+- Logging
