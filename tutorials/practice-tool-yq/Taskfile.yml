@@ -37,35 +37,6 @@ tasks:
       vars: 
         exp: '{{ default .TASK .exp}}'
         src: '{{.src}}'
-
-  run-yq-eval-sample2:
-    desc: run 'yq eval' toolcmd 
-    silent: true
-    preconditions:
-    - sh: '[[ "{{.exp}}" != "" ]]'
-      msg: "required parameter exp _not_ provided"
-    - sh: '[[ "{{.task}}" != "" ]]'
-      msg: "required parameter task _not_ provided"
-    vars:
-      src: 'Taskfile.yml'
-      epath: |-
-        '.tasks.{{.task}}.vars.content'
-    cmds:
-    
-    - |-
-      echo "---
-      # --- input ---"
-      cat {{.src}} \
-      | ./__bin__/yq4 eval {{.epath}} -
-    
-    - |-
-      echo "---
-      # --- output ---"
-      cat {{.src}} \
-      | ./__bin__/yq4 eval {{.epath}} - \
-      | ./__bin__/yq4 eval {{.exp}} -
-
-
   operator_with__basic_sample:
     desc: _
     vars:
@@ -82,6 +53,38 @@ tasks:
       src: 'data_samples/{{.TASK}}.yml'
     <<: *_bind_single__run_yq_eval_sample_
 
+  run-yq-eval-sample2:
+    desc: run 'yq eval' toolcmd 
+    silent: true
+    preconditions:
+    - sh: '[[ "{{.exp}}" != "" ]]'
+      msg: "required parameter exp _not_ provided"
+    - sh: '[[ "{{.epath}}" != "" ]]'
+      msg: "required parameter task _not_ provided"
+    cmds:
+    - |-
+      echo "---
+      # --- input ---"
+      cat {{.src}} \
+      | ./__bin__/yq4 eval {{.epath}} -
+    
+    - |-
+      echo "---
+      # --- output ---"
+      cat {{.src}} \
+      | ./__bin__/yq4 eval {{.epath}} - \
+      | ./__bin__/yq4 eval {{.exp}} -
+
+  bind_yq_eval: 
+    cmds: &bind_yq_eval
+    - task: run-yq-eval-sample2
+      vars:
+        src: 'Taskfile.yml'
+        epath: |-
+          '.tasks.{{.TASK}}.vars.content'
+        exp: |-
+          {{.exp}}
+
   operator_with__basic_sample2:
     desc: _
     vars:
@@ -93,9 +96,6 @@ tasks:
         a:  
           deeply:
             nested: 5
-    cmds:
-    - task: run-yq-eval-sample2
-      vars: 
-        exp: |-
-          'with(.a.deeply.nested ; . = "888")'
-        task: '{{.TASK}}'          
+      exp: |-
+        'with(.a.deeply.nested ; . = "888")'
+    cmds: *bind_yq_eval
