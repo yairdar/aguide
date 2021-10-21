@@ -55,8 +55,8 @@ tasks:
     - |-
       echo "---
       # --- input ---"
-
-      cat {{.src}} | ./__bin__/yq4 eval {{.epath}} -
+      cat {{.src}} \
+      | ./__bin__/yq4 eval {{.epath}} -
     
     - |-
       echo "---
