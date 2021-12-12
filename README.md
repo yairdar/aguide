@@ -50,6 +50,14 @@ Guide To Comfortable Software Development Process
 - Store Storage/Memory
 - Transfer Network
 
+## Publish
+
+- https://towardsdatascience.com/how-to-publish-a-python-package-to-pypi-using-poetry-aa804533fc6f
+- https://python-poetry.org/docs/cli/
+- https://skerritt.blog/packaging-your-python-project/
+- https://gist.github.com/gkhays/a80642ecd8fe476d7220b7940fec5ad0
+- https://wiki.dendron.so/notes/c6fd6bc4-7f75-4cbb-8f34-f7b99bfe2d50/#vaults
+
 ### Operators
 
 ### Elements
