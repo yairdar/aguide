@@ -40,7 +40,7 @@ vars:
   _items_exp: 'yq eval {{ .items_addr_token | replace "@" " " }} | yq eval - '
   repos_conf_file: '{{splitList "@" .items_addr_token | first }}'
   reposet__parallel_exp: 'yq eval {{.repos_conf_file}} vars.reposet__parallel || echo ""'
-  repos: "$(echo $({{._items_exp}} | yq r - -o=json | jq -r '. | keys[]'))"
+  repos: "$(echo $({{._items_exp}} | yq eval - -o=json | jq -r '. | keys[]'))"
   taskpath_arg: "{{if ._taskfile_}} -t {{._taskfile_}}{{else}}{{end}}"
   task_opt: "-o prefixed"
 
