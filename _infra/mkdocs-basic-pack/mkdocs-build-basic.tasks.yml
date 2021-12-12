@@ -138,7 +138,7 @@ tasks:
     vars:
       site_port: '{{ default "15558" .site_port }}'
       source_root: '{{ default .source_root .dir }}'
-      site_dir: '$(yq read {{.source_root}}/mkdocs.yml site_dir)'
+      site_dir: '$(yq eval {{.source_root}}/mkdocs.yml -o=yaml | yq eval .site_dir -)'
     dir: '{{.source_root}}/{{.site_dir}}'
     cmds:
       - echo "Exposing at $(pwd)"
