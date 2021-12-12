@@ -3,7 +3,28 @@
 version: '3'
   
 tasks:
+  
   default:
-    cmds:
-      - task -l
+    cmds: [{task: info}]
+  
+  info:
+    desc: Info
     silent: true
+    cmds: [task -l]
+
+  run-opcmd:
+    desc: run full qualified command. _example_=task run-full task=info.
+    vars:
+      defcmd: "task -t Taskfile.opcmds.yml {{.task}}"
+      reqmds: |-
+        echo "'task' parameter is requrered try run-full task=info"
+      rescmd: >-
+        {{ if .task}}{{ .defcmd}}
+        {{else}}{{.reqmds}}{{end}}
+    cmds: ["{{.rescmd}}"]
+
+  full-info:
+    desc: Build Aguide Documentation
+    cmds:
+    - task info
+    - task run-opcmd task=info
