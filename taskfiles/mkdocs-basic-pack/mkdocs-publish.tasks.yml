@@ -34,14 +34,18 @@ tasks:
       # - task: update-upstream
       # - rm -rf relrepos/yairdar.github.io/aguide
       - rm -rf {{.site_dir}}/LICENSE
-      - cp -r {{.site_dir}}/* {{.pub_dir}}
-      - cp {{.site_dir}}/*.* {{.pub_dir}}
+      - rm -rf {{.site_dir}}/Taskfile.yml
+      - rm -rf {{.site_dir}}/mkdocs.yml
+      - ls -d {{.site_dir}}/* | xargs -I{} echo cp -r {}  {{.pub_dir}}
+      - cp {{.site_dir}}/*.html {{.pub_dir}}
+      - cp {{.site_dir}}/*.xml {{.pub_dir}}
+      - cp {{.site_dir}}/*.xml.* {{.pub_dir}}
       # - rclone copy {{.site_dir}} {{.pub_dir}}
 
   publish-local-upstream-to-remote:
     desc: publish (git push) from local repo to remote
     cmds:
-      - task -d relrepos/yairdar.github.io git:publish-changes
+      - task -d {{.DOCS_UPSTREAM_ROOT_DIR}}/{{.DOCS_UPSTREAM_DIR}} git:publish-changes
 
   publish-site-flow:
     desc: _
@@ -55,3 +59,16 @@ tasks:
       - task: update-pull-upstream
       - task: prepublish-to-local-upstream
       - task: publish-local-upstream-to-remote
+  
+  git:publish-changes:
+    desc: add, commit and push to origin
+    args:
+      msg: msg prefix
+    vars:
+      tid: $(date -u +%Y-%m-%d--%H-%M-%S)
+      _git_prj: '{{.DOCS_UPSTREAM_ROOT_DIR}}/{{.DOCS_UPSTREAM_DIR}}'
+    cmds:
+      - git -C {{._git_prj}} add --all | true
+      - |-
+        git -C {{._git_prj}} commit -am"{{.msg}} .@@tid={{.tid}}" \
+        && git -C {{._git_prj}} push

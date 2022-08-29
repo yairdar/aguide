@@ -31,10 +31,10 @@ plugins:
       # merge_docs_dir: false
       include_extensions:
         # - "README.md"
-        - "LICENSE"
+        # - "LICENSE"
         - ".txt"
         - ".yaml"
-        - ".yml"
+        # - ".yml"
         - ".ico"
         - ".png"
         - ".json"
