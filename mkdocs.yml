@@ -19,6 +19,7 @@ plugins:
         - "docs/course"
         - "decks"
         - "dockers"
+        - "devpod"
         - "projects"
         - "jenpy"
         - "__tmp__"

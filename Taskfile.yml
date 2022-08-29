@@ -49,3 +49,10 @@ tasks:
     cmds:
       - task docs-builder:build-docs
 
+  mkdocs:show-release:
+    desc: _
+    cmds:
+      - |-
+        task serve-site \
+        -d ../yairdar.github.io/ \
+        -o prefixed

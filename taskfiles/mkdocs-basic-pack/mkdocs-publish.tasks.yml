@@ -17,12 +17,31 @@ tasks:
     - mkdir -p {{.DOCS_UPSTREAM_ROOT_DIR}}
     - git clone {{.DOCS_UPSTREAM_REPO}} {{.DOCS_UPSTREAM_ROOT_DIR}}/{{.DOCS_UPSTREAM_DIR}}
 
+  remove-upstream:
+    desc: remove-upstream --force required
+    preconditions: &ref_require_venv
+    - sh: "[[ '{{.DOCS_UPSTREAM_REPO}}' != '' ]]"
+      msg: required argument is not provided .@@dict arg_name=VENV_NAME
+    status:
+    - true
+    cmds:
+    - rm -rf {{.DOCS_UPSTREAM_ROOT_DIR}}/{{.DOCS_UPSTREAM_DIR}}
+
   update-pull-upstream:
     desc: update upstream before publish]
     deps:
     - task: resolve-upstream
     cmds:
     - git -C {{.DOCS_UPSTREAM_ROOT_DIR}}/{{.DOCS_UPSTREAM_DIR}} pull
+
+  rebuild-and-prepublish:
+    desc: task docs-builder:build-site 
+    deps:
+    - task: update-pull-upstream
+    cmds:
+    # assume docks-builder
+    - task docs-builder:build-site
+    - task: prepublish-to-local-upstream
 
   prepublish-to-local-upstream:
     desc: copy from __localbuild__/docs/site to {{.pub_dir}}
@@ -36,7 +55,10 @@ tasks:
       - rm -rf {{.site_dir}}/LICENSE
       - rm -rf {{.site_dir}}/Taskfile.yml
       - rm -rf {{.site_dir}}/mkdocs.yml
-      - ls -d {{.site_dir}}/* | xargs -I{} echo cp -r {}  {{.pub_dir}}
+      - |-
+        ls -d -- {{.site_dir}}/* \
+        | xargs -I{}  \
+          cp -r {} {{.pub_dir}}
       - cp {{.site_dir}}/*.html {{.pub_dir}}
       - cp {{.site_dir}}/*.xml {{.pub_dir}}
       - cp {{.site_dir}}/*.xml.* {{.pub_dir}}
@@ -72,3 +94,23 @@ tasks:
       - |-
         git -C {{._git_prj}} commit -am"{{.msg}} .@@tid={{.tid}}" \
         && git -C {{._git_prj}} push
+
+# >
+  serve-published:
+#
+# ```yaml
+    desc: serve static site with python server
+    # silent: yes
+    vars:
+      # site_port: serving port
+      site_port: '{{ default "15578" .site_port }}'
+
+      # source_root: fs path to root of site
+      source_root: '{{ default "." .source_root }}'
+      _git_prj: '{{.DOCS_UPSTREAM_ROOT_DIR}}/{{.DOCS_UPSTREAM_DIR}}'
+    dir: '{{._git_prj}}'
+    cmds:
+      - echo "Exposing at $(pwd)"
+      - echo "See comipled site at http://localhost:{{.site_port}}"
+      - python -m http.server  {{.site_port}}
+# ```
