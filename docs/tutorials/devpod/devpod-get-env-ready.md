@@ -30,17 +30,18 @@ It contains some basic utilities (`curl` `wget` `git` `vim`  `zip` `unzip`), `ta
 [yq](https://mikefarah.gitbook.io/yq) and [zsh](https://zsh.sourceforge.io/)
 with [oh my zsh](https://ohmyz.sh) extension framework 
 and task autocompletions.  
-**Tasker** is the main automation tool in Devpod. It allows to run complex  
+
+- **Tasker** is the main automation tool in Devpod. It allows to run complex  
 multistep tasks with convenient commands in task taskname form.  
 Tasker uses YAML to describe the tasks, and it makes automation easy and intuitive.  
 That's why Devpod itself relies on Taskfile.  
-**Yq** is a YAML processor that supports JSON as well.  
-_(Note: it's hard for me to explain why any developer needs yq installed and why_  
-_does it come in our main Toolset)_  
-**Zsh** is a powerful shell that supports plugins, has an advanced autocompletion,  
+- **Yq** is a YAML processor that supports JSON as well.  
+  with yq we can use task to introspect other tasks or yaml/json configurations
+  that gives it a lot of power
+- **Zsh** is a powerful shell that supports plugins, has an advanced autocompletion,  
 shorthands for most commonly used commands and vast customization capabilities.  
-**Oh my zsh** framework helps managing zsh configuration and and adds even more conveniece.  
-Task autocompletion for zsh allow to autocomplete task names after `task` command.
+- **Oh my zsh** framework helps managing zsh configuration and and adds even more conveniece.  
+  Task autocompletion for zsh allow to autocomplete task names after `task` command.
 
 In addition to this basic set you can install Custom Devops Parts that you need  
 with following commands:
