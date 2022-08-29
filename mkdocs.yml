@@ -25,6 +25,8 @@ plugins:
         - "_layout_"
         - "tasks"
         - "relrepos"
+        - "devspace"
+        - "taskfiles"
       # merge_docs_dir: false
       include_extensions:
         - ".txt"
