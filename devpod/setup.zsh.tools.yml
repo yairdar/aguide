@@ -1,0 +1,119 @@
+#!/usr/local/bin/task --taskfile
+
+# https://taskfile.dev
+
+version: "3"
+
+vars:
+  MAYBE_SUDO: 
+    sh: which sudo &> /dev/null && echo "sudo" || echo ""
+    
+tasks:
+
+  install-all:
+    desc: "install preconfigured zsh and oh-my-zsh from github"
+    cmds:
+     - task: install-zsh-base
+     - task: config-zsh
+     - task: install-task-completion
+
+  install-zsh-base:
+    desc: "install zsh and oh-my-zsh from github"
+    cmds:
+    - |-
+      {{.MAYBE_SUDO}} apt update && {{.MAYBE_SUDO}} apt install -y zsh curl wget
+    - git clone https://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
+    - cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc
+    #  - {{.MAYBE_SUDO}} chsh -s /bin/zsh
+    status:
+    - test -e ~/.oh-my-zsh
+
+  config-zsh:
+    desc: "set bureau theme for zsh"
+    cmds:
+      - sed -i 's/.*ZSH_THEME=.*/ZSH_THEME="bureau"/' ~/.zshrc
+      - sed -i 's/.*DISABLE_UPDATE_PROMPT=.*/DISABLE_UPDATE_PROMPT=true/' ~/.zshrc
+      - sed -i 's/.*DISABLE_AUTO_UPDATE=.*/DISABLE_AUTO_UPDATE=true/' ~/.zshrc
+      
+  install-task-completion:
+    desc: ""
+    silent: true
+    vars:
+      PYTHON_INSTALLED:
+        sh: which python3 &> /dev/null && echo "yes" || echo "no"
+    cmds:
+
+    - task: install-task-completion-check-python
+    - |-
+      if [[ '{{.PYTHON_INSTALLED}}' = 'no' ]]; then
+        echo '
+          [is up to date] here means:
+          python3 is not found, cannot automaticly setup taskfile competions
+          for manual setup:
+            please open your "~/.zshrc" and add task to plugins list
+            ...
+            plugins=(git task)
+            autoload -U compinit && compinit
+            source $ZSH/oh-my-zsh.sh
+            ...
+        '
+      fi    
+  install-task-completion-check-python:
+    desc: "check if python is installed, and if yes, install task completion"
+    silent: true
+    vars:
+      PYTHON_INSTALLED:
+        sh: which python3 &> /dev/null && echo "yes" || echo "no"
+    status:
+      - test '{{.PYTHON_INSTALLED}}' = 'no'
+    cmds:
+      - |-
+        echo "[ensure: zsh task completion]: python3 is present, will ensure activation of zsh task completion"
+      - task: install-task-completion-now
+  
+  install-task-completion-now--update:
+    desc:
+    status:
+    - git -C ~/.oh-my-zsh/custom/plugins/task remote -v | grep yairdar
+    preconditions:
+    - git -C ~/.oh-my-zsh/custom/plugins/task remote -v | grep -v yairdar    
+    cmds:
+    - |-
+      rm -rf "${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/task"
+    - |-
+      git clone https://github.com/yairdar/go-task-completions.git "${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/task"
+    
+  install-task-completion-now:
+    desc: "install taskgo completions for taskfiles"
+    status:
+      - test -e "${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/task"
+    cmds:
+      - git clone https://github.com/yairdar/go-task-completions.git "${ZSH_CUSTOM:=~/.oh-my-zsh/custom}/plugins/task" || true
+      - |-
+        python3 - <<EOF
+        from pathlib import Path
+        pp = Path.home() / '.zshrc'
+        text = pp.read_text()
+        parts = text.split("\nplugins=(")
+        assert len(parts) == 2
+        end_plugins = parts[1].index(")")
+        prev_cont = parts[1][:end_plugins]
+        next_cont = parts[1][end_plugins+1:]
+        
+        auto_load_line='autoload -U compinit && compinit'
+        auto_load_var= "" if auto_load_line in text else f"\n{auto_load_line}"
+        task_item= "" if "task" in prev_cont else " task "
+        new_text_l = [
+          parts[0], 
+          "\nplugins=(", 
+          prev_cont, 
+          f"{task_item})", 
+          auto_load_var,
+          next_cont
+        ]
+        pp.write_text("".join(new_text_l))
+        EOF
+      - |-
+        echo "Zsh completions for task go installed
+        For immidiate effect run 'source ~/.zshrc'        
+        "
