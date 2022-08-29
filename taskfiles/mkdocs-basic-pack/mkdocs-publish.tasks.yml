@@ -1,19 +1,41 @@
 version: "3"
 vars:
-  publish_rootdir_name: "$(yq_3 read  _layout_/docs-publisher.conf_v4.yaml vars.publish_rootdir_name)"
+  UPSTREAM_ROOT_DIR: __upstream__
 
 tasks:
-  prepublish-to-local-mirror:
+  resolve-upstream:
+    desc: resolve venv with conda. required-arg=VENV_NAME
+    preconditions: &ref_require_venv
+    - sh: "[[ '{{.DOCS_UPSTREAM_REPO}}' != '' ]]"
+      msg: required argument is not provided .@@dict arg_name=VENV_NAME
+    status:
+    - test -d {{.UPSTREAM_ROOT_DIR}} || git clone {{.PRJ_UPSTREAM_REPO}}
+    cmds:
+    - mkdir -p {{.UPSTREAM_ROOT_DIR}}
+    - git clone {{.DOCS_UPSTREAM_REPO}} {{.UPSTREAM_ROOT_DIR}}/{{.PRJ_UPSTREAM_DIR}}
+
+  update-pull-upstream:
+    desc: update upstream before publish]
+    deps:
+    - task: resolve-upstream
+    cmds:
+    - git -C {{.UPSTREAM_ROOT_DIR}}/{{.PRJ_UPSTREAM_DIR}} pull
+
+  prepublish-to-local-upstream:
     desc: copy from __localbuild__/docs/site to {{.pub_dir}}
     vars:       
-      site_dir: '$(yq_3 read ./mkdocs.yml site_dir)'
-      pub_dir: relrepos/yairdar.github.io/{{.publish_rootdir_name}}
+      site_dir: 
+        sh: cat {{.source_root}}/mkdocs.yml | yq e .site_dir
+      pub_dir: '{{.UPSTREAM_ROOT_DIR}}/{{.PRJ_UPSTREAM_DIR}}'
     cmds:
-      # - task repo='"yairdar.github.io"' reposet:resolve:one reposet:pull:one 
+      # - task: update-upstream
       # - rm -rf relrepos/yairdar.github.io/aguide
-      - rclone copy {{.site_dir}} {{.pub_dir}}
+      - rm -rf {{.site_dir}}/LICENSE
+      - cp -r {{.site_dir}}/* {{.pub_dir}}
+      - cp {{.site_dir}}/*.* {{.pub_dir}}
+      # - rclone copy {{.site_dir}} {{.pub_dir}}
 
-  publish-from-local-to-remote:
+  publish-local-upstream-to-remote:
     desc: publish (git push) from local repo to remote
     cmds:
       - task -d relrepos/yairdar.github.io git:publish-changes
@@ -21,8 +43,12 @@ tasks:
   publish-site-flow:
     desc: _
     cmds:
-      - git -C relrepos/yairdar.github.io clean -fdx || true
-      - git -C relrepos/yairdar.github.io git checkout . || true
-      - task -d relrepos/yairdar.github.io git:pull
+      - task: prepublish-to-local-mirror
+      - task: publish-from-local-to-remote
+  
+  publish-site-full-flow:
+    desc: _
+    cmds:
+      - task: update-pull-upstream
       - task: prepublish-to-local-mirror
       - task: publish-from-local-to-remote

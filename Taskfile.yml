@@ -5,13 +5,24 @@ version: '3'
 vars:
   GREETING: Hello, World!
   PRJ_VENV_NAME: site-yairdar-com-cvenv
+  PRJ_UPSTREAM_REPO: https://github.com/yairdar/yairdar.github.io.git
+  PRJ_UPSTREAM_PATH: .
+  PRJ_UPSTREAM_DIR: yairdar.github.io
 
 includes:
   docs-builder: taskfiles/mkdocs-basic-pack/mkdocs-build-basic.tasks.yml
+
+  docs-publisher: 
+    taskfile: taskfiles/mkdocs-basic-pack/mkdocs-publish.tasks.yml
+    vars:
+      DOCS_UPSTREAM_REPO: '{{.PRJ_UPSTREAM_REPO}}'
+      DOCS_UPSTREAM_PATH: '{{.PRJ_UPSTREAM_PATH}}'
+      DOCS_UPSTREAM_DIR: '{{.PRJ_UPSTREAM_DIR}}'
+
   venv:
     taskfile: ./taskfiles/conda-venv.tasks.yaml
     vars:
-      VENV_NAME: '{{.PRJ_VENV_NAME}}'
+      VENV_NAME: site-yairdar-com-cvenv
 
 tasks: 
   
@@ -38,4 +49,3 @@ tasks:
     cmds:
       - task docs-builder:build-docs
 
-  
