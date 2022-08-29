@@ -47,11 +47,11 @@ tasks:
     desc: _
     cmds:
       - task: prepublish-to-local-upstream
-      - task: publish-from-local-to-remote
+      - task: publish-local-upstream-to-remote
   
   publish-site-full-flow:
     desc: _
     cmds:
       - task: update-pull-upstream
       - task: prepublish-to-local-upstream
-      - task: publish-from-local-to-remote
+      - task: publish-local-upstream-to-remote
