@@ -1,6 +1,8 @@
 version: "3"
 vars:
-  UPSTREAM_ROOT_DIR: __upstream__
+  DOCS_UPSTREAM_ROOT_DIR: ..
+  source_root: 
+    sh: realpath . 2>/dev/null || echo .
 
 tasks:
   resolve-upstream:
@@ -9,24 +11,25 @@ tasks:
     - sh: "[[ '{{.DOCS_UPSTREAM_REPO}}' != '' ]]"
       msg: required argument is not provided .@@dict arg_name=VENV_NAME
     status:
-    - test -d {{.UPSTREAM_ROOT_DIR}} || git clone {{.PRJ_UPSTREAM_REPO}}
+    - test -d {{.DOCS_UPSTREAM_ROOT_DIR}}/{{.DOCS_UPSTREAM_DIR}} && test -f {{.DOCS_UPSTREAM_ROOT_DIR}}/{{.DOCS_UPSTREAM_DIR}}/.git
     cmds:
-    - mkdir -p {{.UPSTREAM_ROOT_DIR}}
-    - git clone {{.DOCS_UPSTREAM_REPO}} {{.UPSTREAM_ROOT_DIR}}/{{.PRJ_UPSTREAM_DIR}}
+    - rm -rf {{.DOCS_UPSTREAM_ROOT_DIR}}/{{.DOCS_UPSTREAM_DIR}}
+    - mkdir -p {{.DOCS_UPSTREAM_ROOT_DIR}}
+    - git clone {{.DOCS_UPSTREAM_REPO}} {{.DOCS_UPSTREAM_ROOT_DIR}}/{{.DOCS_UPSTREAM_DIR}}
 
   update-pull-upstream:
     desc: update upstream before publish]
     deps:
     - task: resolve-upstream
     cmds:
-    - git -C {{.UPSTREAM_ROOT_DIR}}/{{.PRJ_UPSTREAM_DIR}} pull
+    - git -C {{.DOCS_UPSTREAM_ROOT_DIR}}/{{.DOCS_UPSTREAM_DIR}} pull
 
   prepublish-to-local-upstream:
     desc: copy from __localbuild__/docs/site to {{.pub_dir}}
     vars:       
       site_dir: 
         sh: cat {{.source_root}}/mkdocs.yml | yq e .site_dir
-      pub_dir: '{{.UPSTREAM_ROOT_DIR}}/{{.PRJ_UPSTREAM_DIR}}'
+      pub_dir: '{{.DOCS_UPSTREAM_ROOT_DIR}}/{{.DOCS_UPSTREAM_DIR}}'
     cmds:
       # - task: update-upstream
       # - rm -rf relrepos/yairdar.github.io/aguide
@@ -43,12 +46,12 @@ tasks:
   publish-site-flow:
     desc: _
     cmds:
-      - task: prepublish-to-local-mirror
+      - task: prepublish-to-local-upstream
       - task: publish-from-local-to-remote
   
   publish-site-full-flow:
     desc: _
     cmds:
       - task: update-pull-upstream
-      - task: prepublish-to-local-mirror
+      - task: prepublish-to-local-upstream
       - task: publish-from-local-to-remote
