@@ -97,7 +97,7 @@ tasks:
         && git -C {{._git_prj}} push
 
 # >
-  serve-published:
+  serve-release-local:
 #
 # ```yaml
     desc: serve static site with python server

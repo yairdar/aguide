@@ -58,10 +58,14 @@ tasks:
     - task docs-publisher:prepublish-to-local-upstream
     - echo "use task mkdocs:show-release to serve release site"
 
-  mkdocs:show-release:
+  mkdocs:serve-release-local:
     desc: _
     cmds:
       - |-
         task docs-publisher:serve-published \
         -o prefixed
 
+  mkdocs:serve-release-public:
+    desc: _
+    cmds:
+      - echo "See release public site at https://yairdar.github.io/"
