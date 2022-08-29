@@ -53,6 +53,6 @@ tasks:
     desc: _
     cmds:
       - |-
-        task serve-site \
-        -d ../yairdar.github.io/ \
+        task docs-publisher:serve-published \
         -o prefixed
+
