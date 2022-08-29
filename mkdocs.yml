@@ -1,11 +1,12 @@
 #===========
-site_name:  Servises Docs
+site_name:  Yiardar Opensource
 # @info.todo: fill your gitlab repo URL + Name
 # https://chrieke.medium.com/the-best-mkdocs-plugins-and-customizations-fc820eb19759
 repo_name: reporepo
 edit_uri: "-/edit/master/docs/"
 site_dir: __localbuild__/docs/site
 # site_dir: relrepos/yairdar.github.io
+
 plugins:
   - simple: # https://athackst.github.io/mkdocs-simple-plugin
       ignore_folders:
@@ -29,6 +30,7 @@ plugins:
         - "taskfiles"
       # merge_docs_dir: false
       include_extensions:
+        - "README.md"
         - ".txt"
         - ".yaml"
         - ".yml"
@@ -41,6 +43,7 @@ plugins:
         - ".html"
         - ".js"
         - ".css"
+       
   - search
 #  - macros:
 #      verbose: true
@@ -57,7 +60,7 @@ plugins:
       # to change all pages partial settings:
       #   find -name '.pages' | xargs -I% bash -c 'mv % $(dirname %)/.mkdocs.pages.yaml'
       collapse_single_pages: true
-      filename: .mkdocs.pages.yaml
+      filename: .pages.yaml
 
 markdown_extensions:
   - admonition
@@ -105,6 +108,10 @@ theme:
   - navigation.tabs
   - navigation.tabs.sticky
   - navigation.expand
+  - navigation.instant
+  # - content.tabs.link  
+  - toc.integrate
+
 #  logo: assets/dora_bw_fat2_png_qdb_icon.ico
 #  favicon: assets/dora_bw_fat2_png_qdb_icon.ico
 
@@ -117,15 +124,11 @@ extra_javascript:
 
 
 nav:
-
-#   - Home:
-#     - ... | README.md
-
-# #   - Infra:
-# #     - ... | _infra/**/*
-# #     - ... | _deps/**/*
-# #     - ... | _tasks/**/*
-# #     - ... | decks/**/*
-
-#   - ...
-
+  # - Home:
+  #   - ... | docs/home/**/*
+  # - Tutorials:
+  #   - ... | docs/tutorials/**/*
+  # - Wip: ./docs/wip/**/*
+  #   - ... | docs/wip/**/*
+# 
+  # - ...

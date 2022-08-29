@@ -1,24 +1,9 @@
-<!-- ---
-hide:
-- toc
---- -->
-
-# Aguide
+# Contribution
 
 A guide to Sowftware Gardening
 
-## About Yairdar Opensource
+## Get Started
 
-This is front page of yairdar.com tools and services
-
-## Toolset
-
-### Tasker
-
-Tasker of `task` or [taskfile.dev](https://taskfile.dev) Project
-is corner stone of rubustic automation
-
-<!-- 
 > We consider that you have conda or python installed
 > and working environment activated.
 
@@ -76,4 +61,4 @@ Guide To Comfortable Software Development Process
 ### Operators
 
 ### Elements
-- Logging -->
+- Logging
