@@ -11,7 +11,8 @@ tasks:
     - sh: "[[ '{{.DOCS_UPSTREAM_REPO}}' != '' ]]"
       msg: required argument is not provided .@@dict arg_name=VENV_NAME
     status:
-    - test -d {{.DOCS_UPSTREAM_ROOT_DIR}}/{{.DOCS_UPSTREAM_DIR}} && test -f {{.DOCS_UPSTREAM_ROOT_DIR}}/{{.DOCS_UPSTREAM_DIR}}/.git
+    - test -e {{.DOCS_UPSTREAM_ROOT_DIR}}/{{.DOCS_UPSTREAM_DIR}}
+    # && test -f {{.DOCS_UPSTREAM_ROOT_DIR}}/{{.DOCS_UPSTREAM_DIR}}/.git
     cmds:
     - rm -rf {{.DOCS_UPSTREAM_ROOT_DIR}}/{{.DOCS_UPSTREAM_DIR}}
     - mkdir -p {{.DOCS_UPSTREAM_ROOT_DIR}}

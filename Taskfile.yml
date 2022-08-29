@@ -47,7 +47,16 @@ tasks:
   mkdocs:build:
     desc: _
     cmds:
-      - task docs-builder:build-docs
+      - task docs-builder:clean-site
+      - task docs-builder:build-site
+
+  mkdocs:prepublish-release:
+    desc: publish release use task mkdocs:show-release to serve release site
+    cmds:
+    - task docs-builder:build-site
+    - task docs-publisher:update-pull-upstream
+    - task docs-publisher:prepublish-to-local-upstream
+    - echo "use task mkdocs:show-release to serve release site"
 
   mkdocs:show-release:
     desc: _

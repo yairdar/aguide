@@ -54,10 +54,6 @@ vars:
     sh: realpath . 2>/dev/null || echo .
   _title_: pip update tasks for conda env
   _taskfile_name_: mkdocs-build-basic.tasks.yml
-  # ### override those settings when used as included-tasker
-  # mkd_es__pip_env_conf_file: mkdocs-build-basic.tasks.yml # path to file with deps list
-  mkd_es__pip_env_conf_loc: vars.deps_pip_mkdocs # path to deps list inside the file
-  # mkd_es__pip_items_exp: yq_3 r {{.mkd_es__pip_env_conf_file}} '{{.mkd_es__pip_env_conf_loc}}'  # get-value expression
 # ```
 #
 # ## Config Entries
@@ -149,4 +145,17 @@ tasks:
       - echo "See comipled site at http://localhost:{{.site_port}}"
       - python -m http.server  {{.site_port}}
 # ```
+# >
+  clean-site:
+#
+# ```yaml
+    desc: serve static site with python server
+    vars:
+      site_dir: 
+        sh: cat {{.source_root}}/mkdocs.yml | yq e .site_dir
+      site_artifact: '{{.source_root}}/{{.site_dir}}'
+    cmds:
+      - rm -rf {{.site_dir}}
+# ```
+
 # /md
