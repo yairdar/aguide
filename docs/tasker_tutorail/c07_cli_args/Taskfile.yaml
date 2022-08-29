@@ -1,0 +1,18 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Call task greet-cli -- username and Tasker will greet you
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+      - task -a
+    silent: true
+
+  greet-cli:
+    desc: 'usage: task greet-cli -- username'
+    cmds:
+      - echo "Hello dear {{.CLI_ARGS}}"

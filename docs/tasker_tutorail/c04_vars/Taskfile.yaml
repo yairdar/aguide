@@ -1,0 +1,26 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+      - task -a
+    silent: true
+
+  greet-global:
+    desc: run this task to print the global GREETING variable declared above
+    cmds:
+      - echo {{.GREETING}}
+
+  greet-local:
+    desc: run this task to print the local GREETING variable declared in task
+    vars:
+      GREETING: Hi! This string is the value of a local variable
+    cmds:
+      - echo {{.GREETING}}
+    

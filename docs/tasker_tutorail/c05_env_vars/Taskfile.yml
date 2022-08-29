@@ -1,0 +1,60 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Here we explore using enviroment variables in tasks
+
+env:
+  GLOBAL_GREET_ENV: This env var is accessible for all tasks
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+      - task -a
+    silent: true
+
+  greet-env:
+    desc: here we declare an enviroment variable right here in task
+    cmds:
+      - echo ${GREETING}
+    env:
+      GREETING: Hello, dear user! Here is the environment variable
+
+  greet-global-env:
+    desc: here we use an enviroment variable declared globally in the taskfile
+    cmds:
+      - echo ${GLOBAL_GREET_ENV}
+
+  greet-global-env-override:
+    desc: here we override an enviroment variable declared globally above
+    cmds:
+      - echo ${GLOBAL_GREET_ENV}
+    env:
+     GLOBAL_GREET_ENV: A local env var overrides the global one
+
+  shell-name:
+    desc: In this task we use existing enviroment variable
+    cmds:
+      - echo ${SHELL}
+
+  shell-name-as-var:
+    desc: This task will evaluate a var to the env var from system
+    cmds:
+      - echo {{.SHELL}}
+
+  shell-var:
+    desc: This task won't evaluate a var to the env var from system
+    cmds:
+      - echo {{.SHELL}}
+    vars:
+      SHELL: var overrides an env var if called as a var
+
+  greet-env-and-var:
+    desc: global and enviroment variable do not fight, but avoid name collisions
+    cmds:
+      - echo "{{.GREETING}}"
+      - echo ${GREETING}
+    env:
+      GREETING: The environment variable doesn't override the global variable

@@ -1,0 +1,43 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Dependencies allow easily run tasks in parallel, that's the point
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+      - task -a
+    silent: true
+
+  download:
+    desc: download datasets in parallel
+    deps:
+      - dataset1
+      - dataset2
+
+  dataset1:
+    desc: download dataset 1
+    cmds:
+      - wget https://eforexcel.com/wp/wp-content/uploads/2017/07/5000-Sales-Records.zip 
+
+  dataset2:
+    desc: download dataset 2
+    cmds:
+      - wget https://eforexcel.com/wp/wp-content/uploads/2017/07/10000-Sales-Records.zip
+
+  extract:
+    desc: extract datasets in parallel
+    deps: [extract1, extract2]
+
+  extract1:
+    desc: extract dataset 1
+    cmds:
+      - unzip 5000-Sales-Records.zip
+
+  extract2:
+    desc: extract dataset 2
+    cmds:
+      - unzip 10000-Sales-Records.zip

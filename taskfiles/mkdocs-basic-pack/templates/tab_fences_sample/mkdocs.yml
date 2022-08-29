@@ -1,30 +1,11 @@
-#===========
 site_name:  Servises Docs
 # @info.todo: fill your gitlab repo URL + Name
 # https://chrieke.medium.com/the-best-mkdocs-plugins-and-customizations-fc820eb19759
 repo_name: reporepo
 edit_uri: "-/edit/master/docs/"
 site_dir: __localbuild__/docs/site
-# site_dir: relrepos/yairdar.github.io
 plugins:
-  - simple: # https://athackst.github.io/mkdocs-simple-plugin
-      ignore_folders:
-        - "__localbuild__"
-        - "__blobs__"
-        - "__blob__"
-        - "data4tests"
-        - "tests"
-        - "src"
-        - "docs/course"
-        - "decks"
-        - "dockers"
-        - "projects"
-        - "jenpy"
-        - "__tmp__"
-        - "_infra"
-        - "_layout_"
-        - "tasks"
-        - "relrepos"
+  - simple:
       # merge_docs_dir: false
       include_extensions:
         - ".txt"
@@ -54,7 +35,7 @@ plugins:
   - awesome-pages:
       # to change all pages partial settings:
       #   find -name '.pages' | xargs -I% bash -c 'mv % $(dirname %)/.mkdocs.pages.yaml'
-      collapse_single_pages: true
+      # collapse_single_pages: true
       filename: .mkdocs.pages.yaml
 
 markdown_extensions:
@@ -111,19 +92,21 @@ extra_css:
 
 extra_javascript:
   - "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" # for math
-  -  https://unpkg.com/mermaid@8.9.0/dist/mermaid.min.js # for mermaid graphs
 
-
-nav:
+# nav:
+#   - Home:
+#      - ... | README.md
+#   - ...
+# nav:
 
 #   - Home:
-#     - ... | README.md
+#     - ... | *.md
 
-# #   - Infra:
-# #     - ... | _infra/**/*
-# #     - ... | _deps/**/*
-# #     - ... | _tasks/**/*
-# #     - ... | decks/**/*
+#   - Infra:
+#     - ... | _infra/**/*
+#     - ... | _deps/**/*
+#     - ... | _tasks/**/*
+#     - ... | decks/**/*
 
 #   - ...
 

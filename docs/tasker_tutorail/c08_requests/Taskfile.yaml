@@ -1,0 +1,59 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Hello, World!
+  REGION: Asia
+  PRODUCT: Cereal
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+      - task -a
+    silent: true
+
+  download-dataset:
+    desc: download a dataset
+    cmds:
+      - wget https://eforexcel.com/wp/wp-content/uploads/2017/07/10000-Sales-Records.zip
+
+  extract-dataset:
+    desc: extract dataset
+    deps:
+      - download-dataset
+    cmds:
+      - unzip 10000-Sales-Records.zip
+
+  query-with-global-vars:
+    desc: query a dataset with the variables set globally above
+    cmds:
+      - cat "10000 Sales Records.csv" | grep "{{.REGION}}" | grep {{.PRODUCT}}
+
+  query-with-cli-args:
+    desc: query a dataset with the global variables and CLI argument
+    cmds:
+    - |-
+      cat "10000 Sales Records.csv" \
+      | grep "{{.REGION}}" | grep {{.PRODUCT}} \
+      | grep {{.CLI_ARGS}}
+
+  query-with-local-vars:
+    desc: query a dataset with the local variables set below
+    cmds:
+      - cat "10000 Sales Records.csv" | grep "{{.REGION}}" | grep {{.PRODUCT}}
+    vars:
+      REGION: Europe
+      PRODUCT: Meat
+
+  query-save-to-file:
+      desc: query a dataset with the local variables and CLI argument for output file
+      cmds:
+      - |-
+        cat "10000 Sales Records.csv" \
+        | grep "{{.REGION}}" | grep {{.PRODUCT}} \
+        > {{.CLI_ARGS}}
+      vars:
+        REGION: Europe
+        PRODUCT: Meat

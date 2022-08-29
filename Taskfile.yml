@@ -1,8 +1,19 @@
 # https://taskfile.dev
 
 version: '3'
-  
-tasks:
+
+vars:
+  GREETING: Hello, World!
+  PRJ_VENV_NAME: site-yairdar-com-cvenv
+
+includes:
+  docs-builder: taskfiles/mkdocs-basic-pack/mkdocs-build-basic.tasks.yml
+  venv:
+    taskfile: ./taskfiles/conda-venv.tasks.yaml
+    vars:
+      VENV_NAME: '{{.PRJ_VENV_NAME}}'
+
+tasks: 
   
   default:
     cmds: [{task: info}]
@@ -12,19 +23,17 @@ tasks:
     silent: true
     cmds: [task -l]
 
-  run-opcmd:
-    desc: run full qualified command. _example_=task run-full task=info.
-    vars:
-      defcmd: "task -t Taskfile.opcmds.yml {{.task}}"
-      reqmds: |-
-        echo "'task' parameter is requrered try run-full task=info"
-      rescmd: >-
-        {{ if .task}}{{ .defcmd}}
-        {{else}}{{.reqmds}}{{end}}
-    cmds: ["{{.rescmd}}"]
-
-  full-info:
-    desc: Build Aguide Documentation
+  spin:exec:
+    desc: spinup deck
     cmds:
-    - task info
-    - task run-opcmd task=info
+      - task {{.TASK}} -d {{.deck}} cmd={{.cmd}}
+
+  spin:up:
+    desc: spinup deck
+    cmds:
+      - task {{.TASK}} -d {{.deck}}
+
+  mkdocs:build:
+    desc: _
+    cmds:
+      - task docs-builder:build-docs

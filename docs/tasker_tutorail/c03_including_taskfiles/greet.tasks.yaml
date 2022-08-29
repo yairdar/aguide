@@ -1,0 +1,9 @@
+# https://taskfile.dev
+
+version: '3'
+
+tasks:
+  simple-greet:
+    desc: 'Call this task like this: task from-another-file:simple_greet'
+    cmds:
+      - echo "Hi from included file"

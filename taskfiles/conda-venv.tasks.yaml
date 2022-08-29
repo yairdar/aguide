@@ -1,0 +1,45 @@
+# this file is a copy from YD's project, so it's tailored for this project
+
+version: '3'
+
+tasks:
+
+  resolve-venv:
+    desc: resolve venv with conda. required-arg=VENV_NAME
+    preconditions: &ref_require_venv
+    - sh: "[[ '{{.VENV_NAME}}' != '' ]]"
+      msg: required argument is not provided .@@dict arg_name=VENV_NAME
+    status:
+    - conda run -n '{{.VENV_NAME}}' python --version
+    cmds:
+    - conda create -y -n '{{.VENV_NAME}}' python=3.9 pip
+
+  delete-venv:
+    desc: resolve venv with conda. required-arg=VENV_NAME
+    preconditions: *ref_require_venv
+    cmds:
+    - conda env remove -n '{{.VENV_NAME}}'
+
+  show-activate:
+    desc: show activation command
+    preconditions: *ref_require_venv
+    silent: true
+    cmds:
+    - echo 'conda activate {{.VENV_NAME}}'
+    
+  shell:
+    desc: enter venv shell
+    preconditions: *ref_require_venv
+    silent: true
+    cmds:
+    - |-
+      echo 'To activate conda shell, type:'
+      echo "conda activate '{{.VENV_NAME}}'"
+
+  run-in-venv:
+    desc: run provided command in vevnv, use suffix '-- THE_COMMAND_LINE'
+    preconditions: *ref_require_venv
+    silent: true
+    cmds:
+    - |-
+      conda run -n '{{.VENV_NAME}}' {{.CLI_ARGS}}

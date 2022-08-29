@@ -1,0 +1,32 @@
+# to create a Taskfile.yaml in a dircetory, run task -i or task --init
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: 'Try to run one task, then two tasks together like this: task greet get-started'
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+      - task -a
+    silent: true
+
+  first-task:
+    desc: _
+    cmds:
+      - echo "My first task runs fine"
+  
+  get-started:
+    desc: _
+    cmds:
+      - echo "Call any task to get started"
+
+  
+  calling-tasks:
+    desc: one task can call another tasks, like this one does
+    cmds:
+      - task: get-started
+      - task: first-task
+
