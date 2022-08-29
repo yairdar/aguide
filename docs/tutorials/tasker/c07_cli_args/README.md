@@ -1,9 +1,9 @@
-# Tasker Quick Start Tutorial
+# Passing CLI Arguments to the Task
 
 *[CLI Arguments](https://taskfile.dev/usage/#forwarding-cli-arguments-to-commands) 
 in official documentation*
 
-## Passing CLI Arguments to the Task 
+## Intro to Passing CLI Arguments to the Task 
 
 [Here is the Taskfile](Taskfile.yml) to follow along.
 

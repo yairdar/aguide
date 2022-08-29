@@ -1,9 +1,9 @@
-# Tasker Quick Start Tutorial
+# Requests - an Applied Tasker Example
 
 *[CLI Arguments](https://taskfile.dev/usage/#forwarding-cli-arguments-to-commands) 
 in official documentation*
 
-## Requests - an Applied Tasker Example
+## Intro to Requests - an Applied Tasker Example
 
 [Here is the Taskfile](Taskfile.yml) to follow along.
 

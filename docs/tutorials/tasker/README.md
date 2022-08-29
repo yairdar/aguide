@@ -1,4 +1,4 @@
-# Tasker Tutorial. Quick Start
+# Intro Tutorial
 
 > This tutorial contains 8 chapters with practical exsercises to master  
 > Tasker from basics to more realistic task in the final chapter.

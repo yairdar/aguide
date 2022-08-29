@@ -1,9 +1,9 @@
-# Tasker Quick Start Tutorial
+# Including Taskfiles
 
 *[Including other Taskfiles](https://taskfile.dev/usage/#including-other-taskfiles) 
 in official documentation*
 
-## Including Taskfiles
+## Intro to Including Taskfiles
 
 [Here is the Taskfile](Taskfile.yml) to follow along.
 

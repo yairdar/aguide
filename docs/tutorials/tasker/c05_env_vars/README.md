@@ -1,9 +1,9 @@
-# Tasker Quick Start Tutorial
+# Environment Variables
 
 *[Environment Variables](https://taskfile.dev/usage/#environment-variables) 
 in official documentation*
 
-## Environment Variables
+## Intro to Environment Variables
 
 [Here is the Taskfile](Taskfile.yml) to follow along.
 

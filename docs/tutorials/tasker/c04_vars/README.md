@@ -1,9 +1,9 @@
-# Tasker Quick Start Tutorial
+# Variables
 
 *[Variables](https://taskfile.dev/usage/#variables) 
 in official documentation*
 
-## Variables
+## Intro to Variables
 
 [Here is the Taskfile](Taskfile.yml) to follow along.
 
