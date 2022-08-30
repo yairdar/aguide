@@ -68,7 +68,7 @@ tasks:
   publish-local-upstream-to-remote:
     desc: publish (git push) from local repo to remote
     cmds:
-      - task -d {{.DOCS_UPSTREAM_ROOT_DIR}}/{{.DOCS_UPSTREAM_DIR}} git:publish-changes
+      - task: git:publish-changes
 
   publish-site-flow:
     desc: _

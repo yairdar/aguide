@@ -7,6 +7,7 @@ __tmp___
 .task
 .idea
 .vscode
+.DS_Store
 
 # .@@=set block=yd.text.list
 __blobls__
