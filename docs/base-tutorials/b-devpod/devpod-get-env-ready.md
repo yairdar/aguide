@@ -32,7 +32,7 @@ with [oh my zsh](https://ohmyz.sh) extension framework
 and task autocompletions.  
 
 - **Tasker** is the main automation tool in Devpod. It allows to run complex  
-multistep tasks with convenient commands in task taskname form.  
+multistep tasks with convenient commands in `task taskname` form.  
 Tasker uses YAML to describe the tasks, and it makes automation easy and intuitive.  
 That's why Devpod itself relies on Taskfile.  
 - **Yq** is a YAML processor that supports JSON as well.  
@@ -40,8 +40,8 @@ That's why Devpod itself relies on Taskfile.
   that gives it a lot of power
 - **Zsh** is a powerful shell that supports plugins, has an advanced autocompletion,  
 shorthands for most commonly used commands and vast customization capabilities.  
-- **Oh my zsh** framework helps managing zsh configuration and and adds even more conveniece.  
-  Task autocompletion for zsh allow to autocomplete task names after `task` command.
+- **Oh my zsh** framework helps managing zsh configuration and and adds even more convenience.  
+  Task autocompletions for zsh allow to autocomplete task names after `task` command.
 
 In addition to this basic set you can install Custom Devops Parts that you need  
 with following commands:
@@ -123,7 +123,7 @@ while preparing your systems for development.
 
 > The `install-nodejs` task example in this chapeter is realistic and not simplified.  
 > If you want to learn how to use taskfiles,
-> [here's a comprehensive tutorial](https://github.com/djfedos/flask-based-todo-app/blob/main/tasker_tutorail/c01_getting_started/README.md).
+> [here's a comprehensive tutorial](../a-tasker/c01_getting_started/README.md).
 
 Here's how to add a custom installation automation to Devpod:
 

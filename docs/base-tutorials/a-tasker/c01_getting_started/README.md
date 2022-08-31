@@ -5,7 +5,7 @@ and [How to Call One Task from Another](https://taskfile.dev/usage/#calling-anot
 
 ## Getting started
 
-[Here is the Taskfile](Taskfile.yml) to follow along.
+[Here is the Taskfile](Taskfile.yaml) to follow along.
 
 > Open the working directory in terminal (I suggest you to use `./working_dir`)
 
@@ -14,7 +14,7 @@ from the official site. I use [the Install Script](https://taskfile.dev/installa
 and it works just fine.
 
 To create a new taskfile in the directory run a command:  
-`task –init`  
+`task --init`  
 A new file, Taskfile.yaml, will appear. Open this file in any text editor.  
 Its content will look like this:
 

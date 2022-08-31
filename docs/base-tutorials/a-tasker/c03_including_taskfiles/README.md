@@ -5,7 +5,7 @@ in official documentation*
 
 ## Intro to Including Taskfiles
 
-[Here is the Taskfile](Taskfile.yml) to follow along.
+[Here is the Taskfile](Taskfile.yaml) to follow along.
 
 > Open the working directory in terminal (I suggest you to use `./working_dir`)
 
@@ -132,4 +132,4 @@ Note:
 > commands, like `task -t taskfile-name.yaml taskname`, that's where this  
 > syntax comes in handy. But whenever you can avoid complexity, please do.
 
-[**Next chapter**](../c04_vars/Taskfile.yaml)
+[**Next chapter**](../c04_vars/README.md)

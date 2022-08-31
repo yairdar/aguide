@@ -4,7 +4,7 @@
 
 ## Task Directory
 
-[Here is the Taskfile](Taskfile.yml) to follow along.
+[Here is the Taskfile](Taskfile.yaml) to follow along.
 
 > Open the working directory in terminal (I suggest you to use `./working_dir`)
 

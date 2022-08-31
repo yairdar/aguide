@@ -1,7 +1,7 @@
 # About
 
 Devpod makes it easy to prepare an environment for software development.  
-It works the same way on cloud computing instances as same as docker containers.
+It works the same way on cloud computing instances and docker containers.
 
 ???+ info "Project Development"
      View source on [Github](https://github.com/yairdar/devpod)
