@@ -162,4 +162,4 @@ This was a long chapter with many sections and edge cases, because its subject
 is pretty complicated. The next chapter will be much easier!
 
 
-## [Next chapter](../c06_deps/README.md)
+[**Next chapter**](../c06_deps/README.md)

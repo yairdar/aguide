@@ -132,4 +132,4 @@ Note:
 > commands, like `task -t taskfile-name.yaml taskname`, that's where this  
 > syntax comes in handy. But whenever you can avoid complexity, please do.
 
-## [Next chapter](../c04_vars/Taskfile.yaml)
+[**Next chapter**](../c04_vars/Taskfile.yaml)

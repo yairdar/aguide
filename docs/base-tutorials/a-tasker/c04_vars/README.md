@@ -75,4 +75,4 @@ By the way:
 
 Now let's see how taskfiles deal with environmental variables.
 
-## [Next chapter](../c05_env_vars/README.md)
+[**Next chapter**](../c05_env_vars/README.md)

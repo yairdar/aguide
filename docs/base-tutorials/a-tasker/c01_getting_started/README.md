@@ -16,7 +16,7 @@ and it works just fine.
 To create a new taskfile in the directory run a command:  
 `task –init`  
 A new file, Taskfile.yaml, will appear. Open this file in any text editor.  
-It content will look like this:
+Its content will look like this:
 
 ```yaml
 # https://taskfile.dev
@@ -125,4 +125,4 @@ Note:
 Even with this basic toolset Tasker can make life much easier.  
 But there's much more to it, as you'll see.
 
-## [Next chapter](../c02_task_directory/README.md)
+[**Next chapter**](../c02_task_directory/README.md)

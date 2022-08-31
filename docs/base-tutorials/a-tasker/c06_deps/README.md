@@ -76,4 +76,4 @@ commands of the task that depend on them.
 
 By the way, we will return to those datasets in further chapters.
 
-## Next chapter
+[**Next chapter**](../c07_cli_args/README.md)

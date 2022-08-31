@@ -54,4 +54,4 @@ no need to specify the directory.
 
 Now you can run `task cleanup` and start over any time you want.
 
-## [Next chapter](../c03_including_taskfiles/README.md)
+[**Next chapter**](../c03_including_taskfiles/README.md)

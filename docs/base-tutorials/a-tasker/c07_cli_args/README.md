@@ -33,4 +33,4 @@ Obviously this feature is useful in more realistic applications as well.
 Like one in the [next chapter](../c08_requests/README.md).
 
 
-## [Next chapter](../c08_requests/README.md)
+[**Next chapter**](../c08_requests/README.md)

@@ -6,12 +6,12 @@ containers or on desktop machines.
 
 > Note that Devpod requires internet access in order to work.
 
-## [Quick Install](https://github.com/yairdar/devpod/blob/main/README.md#quick-install)
+## Quick Install
 
-There are two ways to Quick Install the Devpod: **Setup Base** and **Setup Base
- and Custom Parts**
+There are two ways to Quick Install the Devpod: **Quick Setup Base** and **Quick
+Toolset Setup**
 
-## Setup Base
+## [Quick Setup Base](https://github.com/yairdar/devpod/blob/main/README.md#quick-base-setup)
 
 To install the base toolset first and the rest later, do this:
 
@@ -60,7 +60,7 @@ task  -p -o prefixed setup-cloud-tools setup-os-conda setup-os-docker
 # drop -p to disable parallelism
 ```
 
-## Setup Base and Custom Parts
+## [Quick Toolset Setup](https://github.com/yairdar/devpod/blob/main/README.md#quick-toolset-setup)
 
 If you want to install any of Custom Parts right from the start, you can add  
 arguments to the Quick Install Command like this:
