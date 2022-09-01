@@ -1,0 +1,34 @@
+
+name: ci-flow
+
+on:
+  push:
+    branches: [ main]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      # - uses: actions/checkout@v3
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.9"
+      
+      - name: Install Task
+        uses: arduino/setup-task@v1
+
+      - name: Install pip.deps
+        run: task docs-builder:install-pip-deps
+
+      - name: task mkdocs:build
+        run: task mkdocs:build
+
+      # - name: checkout
+
