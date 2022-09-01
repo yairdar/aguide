@@ -44,20 +44,36 @@ tasks:
     cmds:
       - task {{.TASK}} -d {{.deck}}
 
+  mkdocs:ci-full-publish:
+    desc: builds docs, prepublish to upstream repo, commit and push to remote
+    cmds:
+    - task mkdocs:prepublish-release
+    - task docs-publisher:publish-local-upstream-to-remote
+
+  mkdocs:prepublish-release:
+    desc: publish release use task mkdocs:show-release to serve release site
+    cmds:
+    - task mkdocs:build
+    - task docs-publisher:update-pull-upstream
+    - task docs-publisher:prepublish-to-local-upstream
+    - |-
+      echo """
+        # use
+        # to serve release site
+        task mkdocs:show-release
+        # to commit and push to remote
+        task docs-publisher:publish-local-upstream-to-remote
+      """
+
   mkdocs:build:
     desc: _
     cmds:
       - task docs-builder:clean-site
       - task docs-builder:build-site
 
-  mkdocs:prepublish-release:
-    desc: publish release use task mkdocs:show-release to serve release site
-    cmds:
-    - task docs-builder:build-site
-    - task docs-publisher:update-pull-upstream
-    - task docs-publisher:prepublish-to-local-upstream
-    - echo "use task mkdocs:show-release to serve release site"
 
+  # --- helpers ----
+  
   mkdocs:serve-release-local:
     desc: _
     cmds:
@@ -72,7 +88,5 @@ tasks:
 
   open-docs-site-public:
     desc: open in browser site
-    vars:
-      - adder
     cmds:
-    - open
+    - open https://yairdar.github.io/

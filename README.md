@@ -11,7 +11,7 @@ A guide to Sowftware Gardening
 
 This is front page of yairdar.com tools and services
 
-- Personal Site [yairdar.com](http://167.86.127.241/)
+- Personal Site [yairdar.com](http://yairdar.com)
 
 ## Toolset
 
