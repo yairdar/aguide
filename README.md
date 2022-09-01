@@ -7,13 +7,15 @@ hide:
 
 A guide to Sowftware Gardening
 
-## About Yairdar Opensource
+## About
 
-This is front page of yairdar.com tools and services
+> Yair Dev projects
+
+This site has technical informaition about yairdar projects
 
 - Personal Site [yairdar.com](http://yairdar.com)
 
-## Toolset
+<!-- ## Toolset -->
 
 ### Tasker
 

@@ -118,7 +118,7 @@ tasks:
     desc: serve docs from markdown sources
     dir: '{{ default "." .source_root }}'
     vars:
-      site_port: '{{ default "38000" .site_port }}'
+      site_port: '{{ default "38007" .site_port }}'
     cmds:
     - echo "Exposing at $(pwd)"
     - echo "See live  site at http://localhost:{{.site_port}}"

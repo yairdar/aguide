@@ -105,8 +105,8 @@ markdown_extensions:
 
 theme:
   name: material
-  logo: assets/logo-ico.ico
-  favicon: assets/logo-ico.ico
+  logo: assets/favicon.ico
+  favicon: assets/favicon.ico
   features:
   - navigation.tabs
   - navigation.tabs.sticky
@@ -114,7 +114,22 @@ theme:
   - navigation.instant
   # - content.tabs.link  
   - toc.integrate
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: slate
+      toggle:
+        icon: material/toggle-switch-off-outline
+        name: Switch to dark mode
+      primary: blue grey
 
+    - media: "(prefers-color-scheme: dark)"
+      scheme: default
+      toggle:
+        icon: material/toggle-switch
+        name: Switch to light mode
+      primary: blue grey
+      # accent: teal
+      
 #  logo: assets/dora_bw_fat2_png_qdb_icon.ico
 #  favicon: assets/dora_bw_fat2_png_qdb_icon.ico
 
