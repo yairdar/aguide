@@ -26,19 +26,9 @@ Now we can see documentation using
     Click on http link in vscode (with ctrl(win), alt(macos))
     and it will create port forward and open link in browser
 
-## The Full picture
-
-???+ note "FULL Picture"
-     ```mermaid
-     graph LR
-         A --> B
-     ```
 
 ## Documentation Examples
-
-- [Take a look on documentation trics](./guides/mkdocs-guide.md)
-- or here [Take a look on documentation trics](./docs/guides/mkdocs-guide.md)
-
+- [Take a look on documentation trics](./ops-tools/mkdocs-guide.md)
 
 ## Nature of Software Architecture
 Guide To Comfortable Software Development Process
@@ -50,7 +40,7 @@ Guide To Comfortable Software Development Process
 - Store Storage/Memory
 - Transfer Network
 
-## Publish
+## Publish Docs
 
 - https://towardsdatascience.com/how-to-publish-a-python-package-to-pypi-using-poetry-aa804533fc6f
 - https://python-poetry.org/docs/cli/
@@ -58,7 +48,4 @@ Guide To Comfortable Software Development Process
 - https://gist.github.com/gkhays/a80642ecd8fe476d7220b7940fec5ad0
 - https://wiki.dendron.so/notes/c6fd6bc4-7f75-4cbb-8f34-f7b99bfe2d50/#vaults
 
-### Operators
 
-### Elements
-- Logging

@@ -7,6 +7,13 @@
 - [Gnu Linux MkDocs](https://www.javieranto.com/kb/GNU-Linux/Software/mkDocs/)
 
 ## Minimal Start
+### Mermaid
+
+???+ note "FULL Picture"
+     ```mermaid
+     graph LR
+         A --> B
+     ```
 
 
 ## Plugins
