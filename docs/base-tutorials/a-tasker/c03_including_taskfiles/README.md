@@ -13,7 +13,7 @@ Until now we only tried to run the tasks that are in the Taskfile.yaml in our
 working directory. In many cases it's enough, but there is an option  
 to include external taskfiles to the main one.
 
-Let do it!
+Let's do it!
 
 Create a new taskfile in the working directory: `task --init`.
 
@@ -103,7 +103,7 @@ If it writes out `Hello from a subdirectory!`, then it works as expected.
 
 And that's basically it, except for...
 
-## Optional includes.
+## Optional includes
 
 By default it the included taskfile is not found the main taskfile will  
 not work. If you add `optional: true` line to the include, it's not the  
