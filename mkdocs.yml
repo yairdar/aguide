@@ -1,9 +1,10 @@
 #===========
-site_name:  Yiardar Opensource
+site_name:  YairDev
 # @info.todo: fill your gitlab repo URL + Name
 # https://chrieke.medium.com/the-best-mkdocs-plugins-and-customizations-fc820eb19759
-repo_name: reporepo
-edit_uri: "-/edit/master/docs/"
+repo_name: aguide
+edit_uri: "https://github.com/yairdar/aguide/edit/master/docs/"
+site_url: https://yairdar.github.io/
 site_dir: __localbuild__/docs/site
 # site_dir: relrepos/yairdar.github.io
 

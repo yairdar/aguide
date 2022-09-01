@@ -69,3 +69,10 @@ tasks:
     desc: _
     cmds:
       - echo "See release public site at https://yairdar.github.io/"
+
+  open-docs-site-public:
+    desc: open in browser site
+    vars:
+      - adder
+    cmds:
+    - open
