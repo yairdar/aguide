@@ -11,7 +11,7 @@ node() {
 
 properties([
     parameters([
-        string(name: 'seed_job_repo', defaultValue: 'https://github.com/nostro-im/data-acquisition'),
+        string(name: 'seed_job_repo', defaultValue: 'https://github.com/yairdar/aguide.git'),
         string(name: 'seed_job_branch', defaultValue: 'main')
     ])
 ])

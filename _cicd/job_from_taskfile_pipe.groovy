@@ -30,8 +30,6 @@ node ("${env.node_selector ?: ''}") {
     stage('resolve-deps'){
         // withCredentials([gitUsernamePassword(credentialsId: env.cred_id]) {
         //     // sh "task -d ${kwj.params.taskfile_path} resolve-deps"
-        //     sh """git clone https://github.com/nostro-im/nostro-datalake-config.git"""
-        //     sh """git clone https://github.com/nostro-im/nostro-analytic-tools.git"""
         // }
     }
 
