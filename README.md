@@ -56,13 +56,15 @@ is corner stone of query configs and data from files, including k8s files, taskf
 
 
 
-<table>
-<tr>
-<td>
+<!-- <td>
 
 <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="yair-dar-62962742" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://il.linkedin.com/in/yair-dar-62962742?trk=profile-badge">Yair Dar</a></div>
 
-</td>
+</td> -->
+
+<table>
+<tr>
+
 
 <td>
 Contacts
