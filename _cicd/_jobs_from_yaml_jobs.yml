@@ -18,6 +18,11 @@ jobs:
           desc: select entrypoint taskname, usually ci-flow
           value: ci-flow
 
+        - name: taskfile_path
+          desc: select taskfile path
+          value: Taskfile.yaml
+
+# taskfile_path
         # - name: node_selector
         #   desc: select where to run the job
         #   value: choose node
