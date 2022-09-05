@@ -1,7 +1,7 @@
 jobs:
 
   a-task-tutorial/c01_getting_started: 
-    props: &_ref_gapfiller_custom_props
+    props: &ref_tut_entry
       # active: true
       job_type: pipelineJob
       description: "desc: task runner job"
@@ -14,13 +14,22 @@ jobs:
           desc: select taskfile dir. path to dir with Taskfile}
           value: "docs/base-tutorials/a-tasker/c01_getting_started"
 
-        - name: entrypoint_task
-          desc: select entrypoint taskname, usually ci-flow
-          value: ci-flow
+        - { name: entrypoint_task, value: ci-flow, desc: select entrypoint taskname, usually ci-flow}
+        - { name: taskfile_path, value: Taskfile.yaml, desc: select taskfile name}
+          
 
-        - name: taskfile_path
-          desc: select taskfile path
-          value: Taskfile.yaml
+  a-task-tutorial/c02_task_directory:
+    props:
+      <<: *ref_tut_entry
+      params:
+        - name: taskwork_dir
+          desc: select taskfile dir. path to dir with Taskfile}
+          value: "docs/base-tutorials/a-tasker/c02_task_directory"
+
+        - { name: entrypoint_task, value: ci-flow, desc: select entrypoint taskname, usually ci-flow}
+        - { name: taskfile_path, value: Taskfile.yaml, desc: select taskfile name}
+  
+
 
 # taskfile_path
         # - name: node_selector

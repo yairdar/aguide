@@ -31,3 +31,13 @@ tasks:
     desc: remove a subdirectory so you can start from scratch
     cmds:
       - rm -r temp
+
+  ### --- Main Ci-Flow ---
+
+  ci-flow:
+    desc: ci-flow for this project
+    cmds:
+    - task new-text-file
+    - task read-text
+    - task cleanup
+
