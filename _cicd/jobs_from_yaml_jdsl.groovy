@@ -102,7 +102,7 @@ def create_pipelineJob(job_ctx, job_props){
     fprops.quietPeriod = job_props.quietPeriod ?:  3
     fprops.params = job_props.params
     fprops.cron = job_props.cron ?: ""
-    fprops.envvars = fprops.envvars ?: [:]
+    fprops.envvars = job_props.envvars ?: [:]
 
 
     // ---- job structure ----
