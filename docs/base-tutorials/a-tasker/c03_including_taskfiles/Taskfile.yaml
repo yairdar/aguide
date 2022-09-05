@@ -20,3 +20,17 @@ tasks:
       - echo "{{.GREETING}}"
       - task -a
     silent: true
+
+  demo:from-nonexisting-file:
+    desc: demonstrates calling task from not existing optional import assert not found
+    cmds:
+    - task from-nonexisting-file:some-task |& grep "not found"
+
+  ### --- Main Ci/Demo Flow ---
+
+  ci-flow:
+    desc: Demo from readme sequence
+    cmds:
+    - task from-another-file:simple-greet
+    - task from-subdir:simple-greet
+    - task demo:from-nonexisting-file

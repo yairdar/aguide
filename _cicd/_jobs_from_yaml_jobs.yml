@@ -9,7 +9,7 @@ jobs:
       jenkins_pipeline_path: "_cicd/job_from_taskfile_pipe.groovy"
       branch: "*/main"
       # cred_id: guthub-token--jenkins-soft
-      params:
+      params: &ref_tut_params
         - name: taskwork_dir
           desc: select taskfile dir. path to dir with Taskfile}
           value: "docs/base-tutorials/a-tasker/c01_getting_started"
@@ -21,14 +21,29 @@ jobs:
   a-task-tutorial/c02_task_directory:
     props:
       <<: *ref_tut_entry
-      params:
-        - name: taskwork_dir
-          desc: select taskfile dir. path to dir with Taskfile}
-          value: "docs/base-tutorials/a-tasker/c02_task_directory"
+      envvars:
+        taskwork_dir: docs/base-tutorials/a-tasker/c02_task_directory
 
-        - { name: entrypoint_task, value: ci-flow, desc: select entrypoint taskname, usually ci-flow}
-        - { name: taskfile_path, value: Taskfile.yaml, desc: select taskfile name}
+  a-task-tutorial/c03_including_taskfiles:
+    props:
+      <<: *ref_tut_entry
+      envvars:
+        taskwork_dir: docs/base-tutorials/a-tasker/c03_including_taskfiles
+
+      # params:
+      #   <<: *ref_tut_params
+      #   - name: taskwork_dir
+      #     desc: select taskfile dir. path to dir with Taskfile}
+      #     value: "docs/base-tutorials/a-tasker/c02_task_directory"
   
+  # a-task-tutorial/c03_including_taskfiles:
+  #   props:
+  #     <<: *ref_tut_entry
+  #     params:
+  #       <<: *ref_tut_params
+  #       - name: taskwork_dir
+  #         desc: select taskfile dir. path to dir with Taskfile}
+  #         value: "docs/base-tutorials/a-tasker/c03_including_taskfiles"
 
 
 # taskfile_path
