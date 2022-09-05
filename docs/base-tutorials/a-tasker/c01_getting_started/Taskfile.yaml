@@ -43,9 +43,9 @@ tasks:
   run-all-in-par:
     desc: run all tasks in sequence
     deps:
-    - task: first-task
-    - task: get-started
-    - task: calling-tasks
+    - first-task
+    - get-started
+    - calling-tasks
 
   ### --- Main Ci-Flow ---
 
