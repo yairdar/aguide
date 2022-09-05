@@ -10,13 +10,10 @@ jobs:
       branch: "*/main"
       # cred_id: guthub-token--jenkins-soft
       params: &ref_tut_params
-        - name: taskwork_dir
-          desc: select taskfile dir. path to dir with Taskfile}
-          value: "docs/base-tutorials/a-tasker/c01_getting_started"
-
         - { name: entrypoint_task, value: ci-flow, desc: select entrypoint taskname, usually ci-flow}
         - { name: taskfile_path, value: Taskfile.yaml, desc: select taskfile name}
-          
+      envvars:
+        taskwork_dir: docs/base-tutorials/a-tasker/c01_getting_started            
 
   a-task-tutorial/c02_task_directory:
     props:
