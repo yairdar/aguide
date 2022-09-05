@@ -1,0 +1,55 @@
+jobs:
+
+  a-task-tutorial/c01_getting_started: 
+    props: &_ref_gapfiller_custom_props
+      # active: true
+      job_type: pipelineJob
+      description: "desc: task runner job"
+      git_url: "https://github.com/yairdar/aguide.git"
+      jenkins_pipeline_path: "_cicd/job_from_taskfile_pipe.groovy"
+      branch: "*/main"
+      # cred_id: guthub-token--jenkins-soft
+      params:
+        - name: taskwork_dir
+          desc: select taskfile dir. path to dir with Taskfile}
+          value: "docs/base-tutorials/a-tasker/c01_getting_started"
+
+        - name: entrypoint_task
+          desc: select entrypoint taskname, usually ci-flow
+          value: ci-flow
+
+        # - name: node_selector
+        #   desc: select where to run the job
+        #   value: choose node
+
+
+  # some-parent--scm:
+  #   props:
+  #     # active: true
+  #     job_type: multibranchPipelineJob
+  #     description: "nostro java parent git scm"
+  #     git_url: ""
+  #     jenkins_pipeline_path: "_cicd/build.pipe.groovy"
+  #     branch: "*/master"
+  #     num_to_keep: 5
+  #     cred_id: guthub-token--jenkins-soft
+
+  # some-parent--gh:
+  #   props:
+  #     # active: true
+  #     job_type: multibranchPipelineJobGitHub
+  #     description: "nostro java parent github "
+  #     # git_url: "https://github.com/some-org/some-parent.git"
+  #     repo_org: some-org
+  #     repo_name: some-parent
+  #     jenkins_pipeline_path: "_cicd/build.pipe.groovy"
+  #     branch: "*/master"
+  #     num_to_keep: 5
+  #     cred_id: guthub-token--jenkins-soft
+
+
+  # gapfiller-daily: 
+  #   props:
+  #     <<: *_ref_gapfiller_custom_props
+  #     # cron once in 15 min
+  #     cron: "25 * * * *"

@@ -1,0 +1,23 @@
+# https://taskfile.dev
+
+version: '3'
+
+vars:
+  GREETING: Taskfile Basic Tutorial
+
+tasks:
+  default:
+    cmds:
+      - echo "{{.GREETING}}"
+    silent: true
+
+  list-tutorials:
+    desc: list available tutorials
+    cmds:
+    - ls | grep 'c0*'
+
+  show-tutorial:
+    desc: show info for tutorial
+    cmds:
+    - task -d {{.CLI_ARGS}} -l
+

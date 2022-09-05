@@ -30,3 +30,28 @@ tasks:
       - task: get-started
       - task: first-task
 
+  ### === API part for autorun automation ===
+  ### --- Run Tutorial ---
+
+  run-all-in-seq:
+    desc: run all tasks in sequence
+    cmds:
+    - task first-task
+    - task get-started
+    - task calling-tasks
+
+  run-all-in-par:
+    desc: run all tasks in sequence
+    deps:
+    - task: first-task
+    - task: get-started
+    - task: calling-tasks
+
+  ### --- Main Ci-Flow ---
+
+  ci-flow:
+    desc: ci-flow for this project
+    cmds:
+    - task run-all-in-par
+    - task run-all-in-seq
+
