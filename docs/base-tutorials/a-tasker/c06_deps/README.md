@@ -10,7 +10,7 @@ in official documentation*
 > Open the working directory in terminal (I suggest you to use `./working_dir`)
 
 Here's an important thing:  
-**Dependencies in Tasker is the easy way to do tasks in parallel.**
+**Dependencies in Taskfile is the easy way to do tasks in parallel.**
 
 It's convenient in order to speed up tasks. At the same time it adds a limitation:  
 dependencies shouldn't depend on each other.

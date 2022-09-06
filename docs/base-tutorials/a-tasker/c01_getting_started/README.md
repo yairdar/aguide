@@ -9,7 +9,7 @@ and [How to Call One Task from Another](https://taskfile.dev/usage/#calling-anot
 
 > Open the working directory in terminal (I suggest you to use `./working_dir`)
 
-First install Tasker according to [the instructions](https://taskfile.dev/installation) 
+First install Taskfile according to [the instructions](https://taskfile.dev/installation) 
 from the official site. I use [the Install Script](https://taskfile.dev/installation/#install-script)  
 and it works just fine.
 
@@ -33,7 +33,7 @@ tasks:
     silent: true
 ```
 
-If you'll run a command `task` with no arguments, Tasker will run the `deafult`  
+If you'll run a command `task` with no arguments, Taskfile will run the `deafult`  
 task, hence it's name.
 
 To make your own task, type it below the exisiting one. Mind indentations,  
@@ -78,7 +78,7 @@ tasks:
 
 So far so good. Now let's add the description to our task. First it's a good  
 practice to know what the task's doing. Also, even if the task is self-explanatory,  
-a description allows Tasker shell completion to work. For simple tasks like this  
+a description allows Taskfile shell completion to work. For simple tasks like this  
 just add a dummy `desc: _` line:
 
 ```yaml
@@ -122,7 +122,7 @@ Note:
 > variables are involved. But in more complex setups it may lead to confusion,  
 > so please consider using the native `task: taskname` method.
 
-Even with this basic toolset Tasker can make life much easier.  
+Even with this basic toolset Taskfile can make life much easier.  
 But there's much more to it, as you'll see.
 
 [**Next chapter**](../c02_task_directory/README.md)

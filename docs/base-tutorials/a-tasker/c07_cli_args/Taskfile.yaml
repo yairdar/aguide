@@ -3,7 +3,7 @@
 version: '3'
 
 vars:
-  GREETING: Call task greet-cli -- username and Tasker will greet you
+  GREETING: Call task greet-cli -- username and Taskfile will greet you
 
 tasks:
   default:

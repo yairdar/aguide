@@ -1,4 +1,4 @@
-# Requests - an Applied Tasker Examples
+# Requests - an Applied Taskfile Examples
 
 [Here is the Taskfile](Taskfile.yaml) to follow along.
 
@@ -112,6 +112,6 @@ of our query.
 ## That's it!
 
 Thank you for attending this tutorial.  
-Now you know how to use Tasker. Feel free to apply this knowledge.  
-Hope Tasker will appear a useful tool for you and this tutorial helped you  
+Now you know how to use Taskfile. Feel free to apply this knowledge.  
+Hope Taskfile will appear a useful tool for you and this tutorial helped you  
 to learn its features and feel its human-friendly approach to task automation.

@@ -1,13 +1,12 @@
 
 # Taskfile
 
-## Tasfile for Development Automation
+## Taskfile for Development Automation
 
-> - What’s the point of Tasker?
+> - What’s the point of Taskfile?
 > - Human-friendly automation with a smooth learning curve and serious abilities.
 
 [Offical Site](https://taskfile.dev/)
-
 
 ## Generic Automation Layer
 
@@ -43,7 +42,7 @@ It allows building cross-project tooling without relaying or treating
 specific use cases for specific build systems, 
 since all the differences are taken care of on the taskfile level. 
 
-## Key advantages of Tasker
+## Key advantages of Taskfile
 
 ### Human readable, machine executable
 
@@ -52,16 +51,16 @@ since all the differences are taken care of on the taskfile level.
 
 ### From simplicity to complexity
 
-- Tasker allows you to make small easy steps first and to achieve more complex behavior by chaining them afterwards.
+- Taskfile allows you to make small easy steps first and to achieve more complex behavior by chaining them afterwards.
 
 ### Task names that make sense
 
 - Thanks to YAML syntax and description field for each task, it’s easy to track what you’re doing even in complex automations. Just make sure that you give tasks appropriate names and provide explicit descriptions.
 
-### Tasker works everywhere
+### Taskfile works everywhere
 
 - A lightweight utility that helps a lot
-- You can use Tasker on local machines, servers, Docker containers, CI CD systems like Jenkins or Github Actions.
+- You can use Taskfile on local machines, servers, Docker containers, CI CD systems like Jenkins or Github Actions.
 - Most of the time it’s fairly easy to adapt your Taskfiles for a different platform. Usually you can use them as they are without even editing them, or just adding platform-specific tasks to existing ones.
 
 ### Easily Parsable by other tools

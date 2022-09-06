@@ -26,14 +26,14 @@ bash devpod/install-deps.sh setup-base
 Following the Quick Install procedure you can install a minimal Developer Toolset.
 
 It contains some basic utilities (`curl` `wget` `git` `vim`  `zip` `unzip`), `task` 
-(aka [Tasker](https://taskfile.dev)),  
+(aka [Taskfile](https://taskfile.dev)),  
 [yq](https://mikefarah.gitbook.io/yq) and [zsh](https://zsh.sourceforge.io/)
 with [oh my zsh](https://ohmyz.sh) extension framework 
 and task autocompletions.  
 
-- **Tasker** is the main automation tool in Devpod. It allows to run complex  
+- **Taskfile** is the main automation tool in Devpod. It allows to run complex  
 multistep tasks with convenient commands in `task taskname` form.  
-Tasker uses YAML to describe the tasks, and it makes automation easy and intuitive.  
+Taskfile uses YAML to describe the tasks, and it makes automation easy and intuitive.  
 That's why Devpod itself relies on Taskfile.  
 - **Yq** is a YAML processor that supports JSON as well.  
   with yq we can use task to introspect other tasks or yaml/json configurations
