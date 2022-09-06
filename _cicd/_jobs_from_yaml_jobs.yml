@@ -13,17 +13,17 @@ jobs:
       - { name: entrypoint_task, value: ci-flow, desc: select entrypoint taskname, usually ci-flow}
       - { name: taskfile_path, value: Taskfile.yaml, desc: select taskfile name}
       envvars:
-      - { name: taskwork_dir, value: docs/base-tutorials/a-tasker/c01_getting_started, desc: ""}
+      - { name: taskwork_dir, value: docs/base-tutorials/a-taskfile/c01_getting_started, desc: ""}
 
   a-task-tutorial/c02_task_directory:
     props:
       <<: *ref_tut_entry
       envvars:
-      - { name: taskwork_dir, value: docs/base-tutorials/a-tasker/c02_task_directory, desc: ""}
+      - { name: taskwork_dir, value: docs/base-tutorials/a-taskfile/c02_task_directory, desc: ""}
 
   a-task-tutorial/c03_including_taskfiles:
     props:
       <<: *ref_tut_entry
       envvars:
-      - { name: taskwork_dir, value: docs/base-tutorials/a-tasker/c03_including_taskfiles, desc: ""}
+      - { name: taskwork_dir, value: docs/base-tutorials/a-taskfile/c03_including_taskfiles, desc: ""}
 
