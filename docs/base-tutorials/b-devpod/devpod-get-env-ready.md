@@ -123,7 +123,7 @@ while preparing your systems for development.
 
 > The `install-nodejs` task example in this chapeter is realistic and not simplified.  
 > If you want to learn how to use taskfiles,
-> [here's a comprehensive tutorial](../a-tasker/c01_getting_started/README.md).
+> [here's a comprehensive tutorial](../a-taskfile/c01_getting_started/README.md).
 
 Here's how to add a custom installation automation to Devpod:
 

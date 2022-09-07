@@ -91,6 +91,6 @@ See more community tools at https://taskfile.dev/community/
 ## Getting started
 
 - [install](https://taskfile.dev/installation/)
-- [tutorial](https://yairdar.github.io/base-tutorials/a-tasker/)
+- [tutorial](https://yairdar.github.io/base-tutorials/a-taskfile/)
 - [official docs](https://taskfile.dev/usage/)
 
