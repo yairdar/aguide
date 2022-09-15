@@ -70,7 +70,7 @@ but it will take an additional argument as well. Note the multi-line syntax:
 Try to call it with a country name as an additional argument, for instance:  
 `task query-with-cli-args -- Kazakhstan`
 
-Without a CLI argument it will throw an error, because `grep` need one argument.
+Without a CLI argument it will throw an error, because `grep` needs one argument.
 
 Now let's make another task with local variables overriding global ones:
 
