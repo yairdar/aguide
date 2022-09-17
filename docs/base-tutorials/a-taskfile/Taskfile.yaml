@@ -9,6 +9,7 @@ tasks:
   default:
     cmds:
       - echo "{{.GREETING}}"
+      - task -a
     silent: true
 
   list-tutorials:
@@ -21,3 +22,22 @@ tasks:
     cmds:
     - task -d {{.CLI_ARGS}} -l
 
+  ci-flow:
+    desc: test/demo of all list-tutorials
+    cmds:
+      - echo "Chapter 01 Getting Started"
+      - task ci-flow -t c01_getting_started/Taskfile.yaml
+      - echo "Chapter 02 Task Directory"
+      - task ci-flow -t c02_task_directory/Taskfile.yaml
+      - echo "Chapter 03 Including Taskfiles"
+      - task ci-flow -t c03_including_taskfiles/Taskfile.yaml
+      - echo "Chapter 04 Variables"
+      - task ci-flow -t c04_vars/Taskfile.yaml
+      - echo "Chapter 05 Environmental Variables"
+      - task ci-flow -t c05_env_vars/Taskfile.yaml
+      - echo "Chapter 06 Dependencies"
+      - task ci-flow -t c06_deps/Taskfile.yaml
+      - echo "Chapter 07 CLI Arguments"
+      - task ci-flow -t c07_cli_args/Taskfile.yaml
+      - echo "Chapter 08 Requests"
+      - task ci-flow -t c08_requests/Taskfile.yaml 

@@ -31,6 +31,6 @@ tasks:
   ci-flow:
     desc: Demo from readme sequence
     cmds:
-    - task from-another-file:simple-greet
-    - task from-subdir:simple-greet
-    - task demo:from-nonexisting-file
+    - task: from-another-file:simple-greet
+    - task: from-subdir:simple-greet
+    - task: demo:from-nonexisting-file

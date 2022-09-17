@@ -57,3 +57,16 @@ tasks:
       vars:
         REGION: Europe
         PRODUCT: Meat
+
+  ### --- Main Ci-Flow ---
+
+  ci-flow:
+    desc: ci-flow for this project
+    cmds:
+    - task: extract-dataset
+    - task: query-with-global-vars
+    - task query-with-cli-args -- Vietnam
+    - task: query-with-local-vars
+    - task query-save-to-file -- ci-flow.csv
+    - rm *.csv
+    - rm *.zip

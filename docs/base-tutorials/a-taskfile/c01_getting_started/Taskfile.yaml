@@ -35,7 +35,7 @@ tasks:
   ci-flow:
     desc: ci-flow for this project
     cmds:
-    - task first-task
-    - task get-started
-    - task calling-tasks
+    - task: first-task
+    - task: get-started
+    - task: calling-tasks
 

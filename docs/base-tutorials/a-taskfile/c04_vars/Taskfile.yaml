@@ -24,3 +24,10 @@ tasks:
     cmds:
       - echo {{.GREETING}}
     
+  ### --- Main Ci-Flow ---
+
+  ci-flow:
+    desc: ci-flow for this project
+    cmds:
+    - task: greet-global
+    - task: greet-local

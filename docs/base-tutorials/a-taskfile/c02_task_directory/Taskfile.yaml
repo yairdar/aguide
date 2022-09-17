@@ -37,7 +37,7 @@ tasks:
   ci-flow:
     desc: ci-flow for this project
     cmds:
-    - task new-text-file
-    - task read-text
-    - task cleanup
+    - task: new-text-file
+    - task: read-text
+    - task: cleanup
 

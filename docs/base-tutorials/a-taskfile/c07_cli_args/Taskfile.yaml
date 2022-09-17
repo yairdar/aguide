@@ -16,3 +16,10 @@ tasks:
     desc: 'usage: task greet-cli -- username'
     cmds:
       - echo "Hello dear {{.CLI_ARGS}}"
+
+  ### --- Main Ci-Flow ---
+
+  ci-flow:
+    desc: ci-flow for this project
+    cmds:
+    - task greet-cli -- ci-flow

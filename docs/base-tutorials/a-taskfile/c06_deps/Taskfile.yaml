@@ -41,3 +41,13 @@ tasks:
     desc: extract dataset 2
     cmds:
       - unzip 10000-Sales-Records.zip
+
+  ### --- Main Ci-Flow ---
+
+  ci-flow:
+    desc: ci-flow for this project
+    cmds:
+    - task: download
+    - task: extract
+    - rm *.zip
+    - rm *.csv

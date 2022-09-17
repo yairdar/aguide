@@ -58,3 +58,16 @@ tasks:
       - echo ${GREETING}
     env:
       GREETING: The environment variable doesn't override the global variable
+
+  ### --- Main Ci-Flow ---
+
+  ci-flow:
+    desc: ci-flow for this project
+    cmds:
+    - task: greet-env
+    - task: greet-global-env
+    - task: greet-global-env-override
+    - task: shell-name
+    - task: shell-name-as-var
+    - task: shell-var
+    - task: greet-env-and-var

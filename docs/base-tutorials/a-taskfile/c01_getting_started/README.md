@@ -115,12 +115,22 @@ Voila! Now we can chain tasks and combine them to fit our needs.
 
 Note:
 
+> In example taskfiles you can find `ci-flow` task that calls another tasks  
+> exactly like you've just learned to do. This task is there for test purposes:  
+> you can run it to make sure that all other tasks run properly.  
+> This is an example or real-world Taskfile applicantion.  
+> You can make your `ci-flow` task to call the task sequence for **ci-flow**:  
+> build, test, deploy and any intermediate steps.
+
+Note:
+
 > You can use shell commands in task to call another task, like this:  
 > `- task taskname`  
 > but **it's not recommended**. It will work in simple situations when all the  
 > tasks are in one Taskfile in your working directory and no environment  
 > variables are involved. But in more complex setups it may lead to confusion,  
 > so please consider using the native `task: taskname` method.
+
 
 Even with this basic toolset Taskfile can make life much easier.  
 But there's much more to it, as you'll see.
