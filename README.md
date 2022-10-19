@@ -5,14 +5,14 @@ hide:
 
 # Aguide
 
-A guide to Sowftware Gardening
-This site has technical informaition about yairdar projects
+A guide to Software Gardening
+This site has technical information about YairDev projects
 
 ## About Yair Dar Dev
 
 Personal Site [yairdar.com](http://yairdar.com)
 
-> I have 10 years hands on developer exeprience.
+> I have 10 years hands-on developer experience.
 >
 > In different roles: developer, fullstack, devops, architect.
 >
@@ -27,7 +27,7 @@ Technical Documentation about projects [yairdar.github.io](https://yairdar.githu
 - [aguide](https://yairdar.github.io/) Technical Articles and Guides
 - [devpod](https://github.com/yairdar/devpod) Os Blocks for Image Builds and Setups
 - [jenlib](https://yairdar.github.io/jenlib/) Jenkins Automation on Steroids
-- [tasker](https://github.com/ydzvulon/tasker) Taskfile Visualisations and packs
+- [tasker](https://github.com/ydzvulon/tasker) Taskfile Visualization and packs
 
 ## Essential Tooling
 
